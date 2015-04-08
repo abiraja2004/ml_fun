@@ -1,0 +1,55 @@
+a {
+	color: blue;
+	text-decoration: none;
+}
+
+#header {
+	padding-bottom: 10px;
+}
+
+#userinput {
+	width: 450px;
+	float: left;
+}
+
+#userinput .adder {
+	padding-bottom: 5px;
+}
+
+#userinput .submit {
+	padding-top: 5px;
+}
+
+#userinput .chooser {
+	padding: 5px 10px 5px 20px;
+}
+
+#userinput .chooser span {
+	padding-right: 10px;
+}
+
+#userinput select.feature {
+	width: 200px;
+}
+
+#userinput select.value {
+	width: 125px;
+}
+
+#results {
+	display: none;
+	text-align: center;
+	float: left;
+}
+
+#baseline_chart,
+#features_chart  {
+	display: inline-block;
+	width: 320px;
+}
+
+#column_chart {
+	display: inline-block;
+	width: 600px;
+	height: 400px;
+}
