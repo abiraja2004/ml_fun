@@ -1,3 +1,5 @@
 .DS_Store
 mnist.pkl.gz
 domino.*
+.ipynb_checkpoints*
+*~*
