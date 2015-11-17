@@ -3,3 +3,6 @@ mnist.pkl.gz
 domino.*
 .ipynb_checkpoints*
 *~*
+TheDemocrats_GOP.edge.csv.gz
+TheDemocrats_GOP.vertex.csv.gz
+lyuba_cdr.csv
