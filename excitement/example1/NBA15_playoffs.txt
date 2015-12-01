@@ -1,0 +1,69 @@
+SVM using the NBA15_playoffs.csv as test with the NBA12_14.csv as the training data. 
+The SVM has numerous flaws, including that some of these teams should have better statistics during the season,
+but they rested players towards the end of the season, such as the Atlanta Hawks and Cleveland Cavs
+
+It would probably be better use data for previous playoffs as opposed to just the regular season
+
+
+In addition, some teams made trades during the season that dramatically altered the players on their rosters,
+and thus the overall statistics. For example, the Cavs and Celtics made some major trades during the season
+
+Finally, it would be better to use better predictors than the predictors used in the csv files,
+which were Effective FG%, Turnover Percentage, Offensive Rebound %, and Free Throws Per Field Goal Attempt
+Based on the statistical analysis I performed using MCMC on what variables affect a team's winning percentage,
+I found that True Shooting % and Assist Per Turnover Ratio are better predictors
+
+
+SVM with 2012_14 training data made the following predictions for the games below:
+
+The results for "NBA15_playoffs.csv" are below:
+[[ 0.78451177  0.21548823]  #PelicansAtWarriors - Warriors are home, so they have 78% of winning
+ [ 0.34935921  0.65064079]  #Warriors at Pelicans  - Pelicans are home, 34.9% chance of winning. Warriors should win 4-0 or 4-1
+ [ 0.60758726  0.39241274]  #Mavericks at Rockets
+ [ 0.60851272  0.39148728]  #Rockets at Mavericks - In a 6 game series, this seems evenly matched. But because Rockets play home if there's a game 7, they should win 4-3
+ [ 0.644862    0.355138  ]  #Spurs at Clippers
+ [ 0.62064258  0.37935742]  #Clippers at Spurs - Similar to Rockets/Mavs, Clippers should win 4-3
+ [ 0.71060219  0.28939781]  #Blazers at Grizzlies
+ [ 0.47960882  0.52039118]  #Grizzlies at Blazers - Grizzlies should win about 4-1 or 4-2
+ [ 0.80420559  0.19579441]  #Nets at Hawks
+ [ 0.34488741  0.65511259]  #Hawks at Nets - Hawks should win 4-0 or 4-1
+ [ 0.76742969  0.23257031]  #Celtics at Cavs
+ [ 0.35322162  0.64677838]  #Cavs at Celtics - Cavs should win 4-0 or 4-1
+ [ 0.7078349   0.2921651 ]  #Bucks at Bulls
+ [ 0.43932232  0.56067768]  #Bulls at Bucks - Bulls should win 4-1
+ [ 0.73001987  0.26998013]  #Wizards at Raptors 
+ [ 0.44913647  0.55086353]  #Raptors at Wizards - Raptors should win 4-1
+ [ 0.6979027   0.3020973 ]  #Grizzlies at Warriors
+ [ 0.5676146   0.4323854 ]  #Warriors at Grizzlies - Warriors should win 4-2
+ [ 0.55885046  0.44114954]  #Clippers at Rockets
+ [ 0.67012776  0.32987224]  #Rockets at Clippers - This is difficult to determine. If this were just a 6-game series, the Clippers appear more likely to win. But if it goes to 7th game, Rockets have higher chance of winning
+ [ 0.69199887  0.30800113]  #Raptors at Hawks
+ [ 0.55743554  0.44256446]  #Hawks at Raptors - Hawks maybe 4-2
+ [ 0.59849651  0.40150349]  #Bulls at Cavs
+ [ 0.54011832  0.45988168]] #Cavs at Bulls - Cavs 4-3
+
+
+
+
+
+
+
+Blazers at Grizzlies - Grizzlies have 71% chance of winning against Blazers
+Nets at Hawks
+Twolves at Warriors - Highest difference out of the outcomes below
+Grizz At Blazers - Surprising that Grizzlies still have 52% chance of winning at Blazers 
+Twolves At Blazers - Blazers have 72% chance of winning
+WarriorsAt Grizz - Grizz have 56% chance of winning
+Grizz At Warriors
+Wiz At Raptors - Raptors have 73% chance of winning
+Raptors At Wiz - Raptors still have 55% chance of winning at Washington
+
+[[ 0.71060219  0.28939781]
+ [ 0.80420559  0.19579441]
+ [ 0.86811352  0.13188648]
+ [ 0.47960882  0.52039118]
+ [ 0.72407884  0.27592116]
+ [ 0.5676146   0.4323854 ]
+ [ 0.6979027   0.3020973 ]
+ [ 0.73001987  0.26998013]
+ [ 0.44913647  0.55086353]]
