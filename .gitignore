@@ -9,3 +9,4 @@ lyuba_cdr.csv
 .idea/
 test_features.h5
 train_features.h5
+junk*
