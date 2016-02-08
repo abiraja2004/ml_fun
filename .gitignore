@@ -7,6 +7,6 @@ TheDemocrats_GOP.edge.csv.gz
 TheDemocrats_GOP.vertex.csv.gz
 lyuba_cdr.csv
 .idea/
-test_features.h5
-train_features.h5
+features.h5
+features.h5
 junk*
