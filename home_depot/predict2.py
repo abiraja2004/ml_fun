@@ -23,10 +23,10 @@ import re
 import random
 random.seed(2016)
 
-df_train = pd.read_csv('../input/train.csv', encoding="ISO-8859-1")
-df_test = pd.read_csv('../input/test.csv', encoding="ISO-8859-1")
-df_pro_desc = pd.read_csv('../input/product_descriptions.csv')
-df_attr = pd.read_csv('../input/attributes.csv')
+df_train = pd.read_csv('data/train.csv', encoding="ISO-8859-1")
+df_test = pd.read_csv('data/test.csv', encoding="ISO-8859-1")
+df_pro_desc = pd.read_csv('data/product_descriptions.csv')
+df_attr = pd.read_csv('data/attributes.csv')
 df_brand = df_attr[df_attr.name == "MFG Brand Name"][["product_uid", "value"]].rename(columns={"value": "brand"})
 num_train = df_train.shape[0]
 df_all = pd.concat((df_train, df_test), axis=0, ignore_index=True)
