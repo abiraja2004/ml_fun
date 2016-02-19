@@ -8,9 +8,12 @@ TheDemocrats_GOP.vertex.csv.gz
 lyuba_cdr.csv
 .idea/
 features.h5
-features.h5
 junk*
 crap*
 crud*
 notes.html
 notes.py
+home_depot/data/attributes.csv
+home_depot/data/product_descriptions.csv
+home_depot/data/test.csv
+home_depot/data/train.csv
