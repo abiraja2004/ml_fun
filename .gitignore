@@ -18,6 +18,8 @@ notes.html
 notes.py
 
 home_depot/Data
+home_depot/Feat
+home_depot/Output
 
 telstra/data/test_dataset.csv
 telstra/data/train_dataset.csv
