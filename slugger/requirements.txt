@@ -1,0 +1,4 @@
+nltk == 3.1
+numpy == 1.10.4
+reportlab == 3.3.0
+scikit_learn == 0.17.1

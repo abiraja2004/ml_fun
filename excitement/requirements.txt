@@ -1,0 +1,15 @@
+ggplot == 0.6.8
+lxml == 3.5.0
+matplotlib == 1.4.2
+numpy == 1.10.4
+pandas == 0.17.1
+matplotlib == 1.4.2
+PyMySQL == 0.6.2
+requests == 2.7.0
+statsmodels == 0.5.0
+QSTK == 0.2.8
+beautifulsoup4 == 4.4.1
+python_dateutil == 2.4.2
+pylab == 0.1.3
+scikit_learn == 0.17.1
+twython == 3.3.0
