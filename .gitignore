@@ -1,6 +1,7 @@
 .DS_Store
 .ipynb_checkpoints*
 .idea/
+*.pyc
 *~*
 
 TheDemocrats_GOP.edge.csv.gz

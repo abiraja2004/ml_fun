@@ -60,17 +60,12 @@ def get_position_list(target, obs):
 ## Pre-process data ##
 ######################
 token_pattern = r"(?u)\b\w\w+\b"
-#token_pattern = r'\w{1,}'
-#token_pattern = r"\w+"
-#token_pattern = r"[\w']+"
 def preprocess_data(line,
                     token_pattern=token_pattern,
                     exclude_stopword=config.cooccurrence_word_exclude_stopword,
                     encode_digit=False):
     token_pattern = re.compile(token_pattern, flags = re.UNICODE | re.LOCALE)
-    ## tokenize
     tokens = [x.lower() for x in token_pattern.findall(line)]
-    ## stem
     tokens_stemmed = stem_tokens(tokens, english_stemmer)
     if exclude_stopword:
         tokens_stemmed = [x for x in tokens_stemmed if x not in stopwords]
@@ -78,30 +73,32 @@ def preprocess_data(line,
 
 
 def extract_feat(df):
+
+    names = ["query", "product_title", "product_description"]
+
     ## unigram
-    print "generate unigram"
-    df["query_unigram"] = list(df.apply(lambda x: preprocess_data(x["query"]), axis=1))
-    df["title_unigram"] = list(df.apply(lambda x: preprocess_data(x["product_title"]), axis=1))
-    df["description_unigram"] = list(df.apply(lambda x: preprocess_data(x["product_description"]), axis=1))
+    for n in names:
+        print("Generate unigram: %s" % n)
+        df["%s_unigram"%(n)] = list(df.apply(lambda x: preprocess_data(x[n]), axis=1))
+
     ## bigram
-    print "generate bigram"
-    join_str = "_"
-    df["query_bigram"] = list(df.apply(lambda x: ngram.getBigram(x["query_unigram"], join_str), axis=1))
-    df["title_bigram"] = list(df.apply(lambda x: ngram.getBigram(x["title_unigram"], join_str), axis=1))
-    df["description_bigram"] = list(df.apply(lambda x: ngram.getBigram(x["description_unigram"], join_str), axis=1))
+    for n in names:
+        print("Generate bigram: %s" % n)
+        join_str = "_"
+        df["%s_bigram"%(n)] = list(df.apply(lambda x: ngram.getBigram(x["%s_unigram"%(n)], join_str), axis=1))
+
     ## trigram
-    print "generate trigram"
-    join_str = "_"
-    df["query_trigram"] = list(df.apply(lambda x: ngram.getTrigram(x["query_unigram"], join_str), axis=1))
-    df["title_trigram"] = list(df.apply(lambda x: ngram.getTrigram(x["title_unigram"], join_str), axis=1))
-    df["description_trigram"] = list(df.apply(lambda x: ngram.getTrigram(x["description_unigram"], join_str), axis=1))
+    for n in names:
+        print("Generate trigram: %s" % n)
+        join_str = "_"
+        df["%s_trigram"%(n)] = list(df.apply(lambda x: ngram.getTrigram(x["%s_unigram"%(n)], join_str), axis=1))
 
 
     ################################
     ## word count and digit count ##
     ################################
     print "generate word counting features"
-    feat_names = ["query", "title", "description"]
+    feat_names = ["query", "product_title", "product_description"]
     grams = ["unigram", "bigram", "trigram"]
     count_digit = lambda x: sum([1. for w in x if w.isdigit()])
     for feat_name in feat_names:
@@ -116,7 +113,7 @@ def extract_feat(df):
         df["ratio_of_digit_in_%s"%feat_name] = map(try_divide, df["count_of_digit_in_%s"%feat_name], df["count_of_%s_unigram"%(feat_name)])
 
     ## description missing indicator
-    df["description_missing"] = list(df.apply(lambda x: int(x["description_unigram"] == ""), axis=1))
+    df["description_missing"] = list(df.apply(lambda x: int(x["product_description_unigram"] == ""), axis=1))
 
 
     ##############################
@@ -133,10 +130,10 @@ def extract_feat(df):
                     df["ratio_of_%s_%s_in_%s"%(obs_name,gram,target_name)] = map(try_divide, df["count_of_%s_%s_in_%s"%(obs_name,gram,target_name)], df["count_of_%s_%s"%(obs_name,gram)])
 
         ## some other feat
-        df["title_%s_in_query_div_query_%s"%(gram,gram)] = map(try_divide, df["count_of_title_%s_in_query"%gram], df["count_of_query_%s"%gram])
-        df["title_%s_in_query_div_query_%s_in_title"%(gram,gram)] = map(try_divide, df["count_of_title_%s_in_query"%gram], df["count_of_query_%s_in_title"%gram])
-        df["description_%s_in_query_div_query_%s"%(gram,gram)] = map(try_divide, df["count_of_description_%s_in_query"%gram], df["count_of_query_%s"%gram])
-        df["description_%s_in_query_div_query_%s_in_description"%(gram,gram)] = map(try_divide, df["count_of_description_%s_in_query"%gram], df["count_of_query_%s_in_description"%gram])
+        df["title_%s_in_query_div_query_%s"%(gram,gram)] = map(try_divide, df["count_of_product_title_%s_in_query"%gram], df["count_of_query_%s"%gram])
+        df["title_%s_in_query_div_query_%s_in_product_title"%(gram,gram)] = map(try_divide, df["count_of_product_title_%s_in_query"%gram], df["count_of_query_%s_in_product_title"%gram])
+        df["description_%s_in_query_div_query_%s"%(gram,gram)] = map(try_divide, df["count_of_product_description_%s_in_query"%gram], df["count_of_query_%s"%gram])
+        df["description_%s_in_query_div_query_%s_in_product_description"%(gram,gram)] = map(try_divide, df["count_of_product_description_%s_in_query"%gram], df["count_of_query_%s_in_product_description"%gram])
 
 
     ######################################
@@ -186,7 +183,8 @@ if __name__ == "__main__":
     print("==================================================")
     print("Generate counting features...")
 
-
+    print("==================================================")
+    print("Train")
     extract_feat(dfTrain)
     feat_names = [
         name for name in dfTrain.columns \
@@ -196,9 +194,10 @@ if __name__ == "__main__":
             or "pos_of" in name
     ]
     feat_names.append("description_missing")
+    print("Done.")
 
-
-    print("For cross-validation...")
+    print("==================================================")
+    print("K-folds in cross-validation")
     for run in range(config.n_runs):
         ## use 33% for training and 67 % for validation
         ## so we switch trainInd and validInd
@@ -218,10 +217,9 @@ if __name__ == "__main__":
                     cPickle.dump(X_valid, f, -1)
     print("Done.")
 
-
-    print("For training and testing...")
+    print("==================================================")
+    print("Test")
     path = "%s/All" % config.feat_folder
-    ## use full version for X_train
     extract_feat(dfTest)
     for feat_name in feat_names:
         X_train = dfTrain[feat_name].values
@@ -230,10 +228,9 @@ if __name__ == "__main__":
             cPickle.dump(X_train, f, -1)
         with open("%s/test.%s.feat.pkl" % (path, feat_name), "wb") as f:
             cPickle.dump(X_test, f, -1)
+    print("Done.")
             
     ## save feat names
     print("Feature names are stored in %s" % feat_name_file)
-    ## dump feat name
     dump_feat_name(feat_names, feat_name_file)
-
     print("All Done.")

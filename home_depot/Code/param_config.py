@@ -66,4 +66,4 @@ config = ParamConfig(feat_folder="../../Feat/solution",
                      text_encoding="ISO-8859-1",
                      drop_html_flag=False,
                      stemmer_type="porter",
-                     cooccurrence_word_exclude_stopword=False)
+                     cooccurrence_word_exclude_stopword=True)

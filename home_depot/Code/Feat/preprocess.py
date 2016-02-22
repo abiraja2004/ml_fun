@@ -1,19 +1,3 @@
-
-"""
-__file__
-
-    preprocess.py
-
-__description__
-
-    This file preprocesses data.
-
-__author__
-
-    Chenglong Chen
-    
-"""
-
 import sys
 import cPickle
 import numpy as np
@@ -67,6 +51,11 @@ dfTest["qid"] = map(lambda q: qid_dict[q], dfTest["query"])
 clean = lambda line: clean_text(line, drop_html_flag=config.drop_html_flag)
 dfTrain = dfTrain.apply(clean, axis=1)
 dfTest = dfTest.apply(clean, axis=1)
+
+## unique chars
+#uniq_char = set(''.join(''.join(dfTrain.product_title.tolist()).split())) | set(''.join(''.join(dfTest.product_title.tolist()).split()))
+#reject = [x for x in uniq_char if not x.isalnum()]
+#reject = '|'.join(reject)
 
 print("Done.")
 
