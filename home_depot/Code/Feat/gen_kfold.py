@@ -1,20 +1,3 @@
-
-"""
-__file__
-
-    gen_kfold.py
-
-__description__
-
-    This file generates the StratifiedKFold indices which will be kept fixed in
-    ALL the following model building parts.
-
-__author__
-
-    Chenglong Chen < c.chenglong@gmail.com >
-
-"""
-
 import sys
 import cPickle
 from sklearn.cross_validation import StratifiedKFold
