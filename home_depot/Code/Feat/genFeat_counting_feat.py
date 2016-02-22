@@ -74,7 +74,7 @@ def preprocess_data(line,
 
 def extract_feat(df):
 
-    names = ["query", "product_title", "product_description"]
+    names = ["product_title", "product_description", "query"]
 
     ## unigram
     for n in names:
@@ -186,6 +186,14 @@ if __name__ == "__main__":
     print("==================================================")
     print("Train")
     extract_feat(dfTrain)
+    print("Done.")
+
+    print("==================================================")
+    print("Test")
+    extract_feat(dfTest)
+    print("Done.")
+
+    path = "%s/All" % config.feat_folder
     feat_names = [
         name for name in dfTrain.columns \
             if "count" in name \
@@ -194,7 +202,14 @@ if __name__ == "__main__":
             or "pos_of" in name
     ]
     feat_names.append("description_missing")
-    print("Done.")
+    for feat_name in feat_names:
+        X_train = dfTrain[feat_name].values
+        X_test = dfTest[feat_name].values
+        with open("%s/train.%s.feat.pkl" % (path, feat_name), "wb") as f:
+            cPickle.dump(X_train, f, -1)
+        with open("%s/test.%s.feat.pkl" % (path, feat_name), "wb") as f:
+            cPickle.dump(X_test, f, -1)
+
 
     print("==================================================")
     print("K-folds in cross-validation")
@@ -217,19 +232,6 @@ if __name__ == "__main__":
                     cPickle.dump(X_valid, f, -1)
     print("Done.")
 
-    print("==================================================")
-    print("Test")
-    path = "%s/All" % config.feat_folder
-    extract_feat(dfTest)
-    for feat_name in feat_names:
-        X_train = dfTrain[feat_name].values
-        X_test = dfTest[feat_name].values
-        with open("%s/train.%s.feat.pkl" % (path, feat_name), "wb") as f:
-            cPickle.dump(X_train, f, -1)
-        with open("%s/test.%s.feat.pkl" % (path, feat_name), "wb") as f:
-            cPickle.dump(X_test, f, -1)
-    print("Done.")
-            
     ## save feat names
     print("Feature names are stored in %s" % feat_name_file)
     dump_feat_name(feat_names, feat_name_file)
