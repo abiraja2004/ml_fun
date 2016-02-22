@@ -17,3 +17,8 @@ home_depot/data/attributes.csv
 home_depot/data/product_descriptions.csv
 home_depot/data/test.csv
 home_depot/data/train.csv
+telstra/data/test_dataset.csv
+telstra/data/train_dataset.csv
+home_depot/Data/synonyms.csv
+home_depot/Data/test_orig.csv
+home_depot/Data/train_orig.csv
