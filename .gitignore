@@ -24,6 +24,8 @@ home_depot/Output
 
 telstra/data/test_dataset.csv
 telstra/data/train_dataset.csv
+telstra/data/test_ksmod.csv
+telstra/data/train_ksmod.csv
 
 sci_bowl_2015/data
 sci_bowl_2015/weights*
