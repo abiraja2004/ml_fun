@@ -34,7 +34,7 @@ __author__
     Chenglong Chen < c.chenglong@gmail.com >
 
 """
-
+import os.path
 import sys
 import cPickle
 import numpy as np
@@ -100,10 +100,12 @@ def generate_dist_stats_feat(metric, X_train, ids_train, X_test, ids_test, indic
 ## extract all features
 def extract_feat(path, dfTrain, dfTest, mode, feat_names, column_names):
 
+    print "Get feature names..."
     new_feat_names = copy(feat_names)
     ## first fit a bow/tfidf on the all_text to get
     ## the common vocabulary to ensure query/title/description
     ## has the same length bow/tfidf for computing the similarity
+    print "Process vocab..."
     if vocabulary_type == "common":
         if vec_type == "tfidf":
             vec = getTFV(ngram_range=ngram_range)
@@ -113,30 +115,53 @@ def extract_feat(path, dfTrain, dfTest, mode, feat_names, column_names):
         vocabulary = vec.vocabulary_
     elif vocabulary_type == "individual":
         vocabulary = None
+
+    ## get the indices of pooled samples
+    relevance_indices_dict = get_sample_indices_by_relevance(dfTrain)
+    query_relevance_indices_dict = get_sample_indices_by_relevance(dfTrain, "qid")
+
     for feat_name,column_name in zip(feat_names, column_names):
+
+        print "Working on %s for %s" % (feat_name, column_name)
+        if (os.path.isfile("%s/train.%s.feat.pkl" % (path, feat_name)) and
+            os.path.isfile("%s/%s.%s.feat.pkl" % (path, mode, feat_name))):
+            continue
 
         ##########################
         ## basic bow/tfidf feat ##
         ##########################
-        print "generate %s feat for %s" % (vec_type, column_name)
+        print "Generate %s feat for %s" % (vec_type, column_name)
         if vec_type == "tfidf":
             vec = getTFV(ngram_range=ngram_range, vocabulary=vocabulary)
         elif vec_type == "bow":
             vec = getBOW(ngram_range=ngram_range, vocabulary=vocabulary)
+
+        if (os.path.isfile("%s/train.%s.feat.pkl" % (path, feat_name))):
+            continue
+
         X_train = vec.fit_transform(dfTrain[column_name])
-        X_test = vec.transform(dfTest[column_name])
         with open("%s/train.%s.feat.pkl" % (path, feat_name), "wb") as f:
             cPickle.dump(X_train, f, -1)
+
+        if os.path.isfile("%s/%s.%s.feat.pkl" % (path, mode, feat_name))):
+            continue
+
+        X_test = vec.transform(dfTest[column_name])
         with open("%s/%s.%s.feat.pkl" % (path, mode, feat_name), "wb") as f:
             cPickle.dump(X_test, f, -1)
         
         if stats_feat_flag:
+
             #####################################
             ## bow/tfidf cosine sim stats feat ##
             #####################################
-            ## get the indices of pooled samples
-            relevance_indices_dict = get_sample_indices_by_relevance(dfTrain)
-            query_relevance_indices_dict = get_sample_indices_by_relevance(dfTrain, "qid")
+
+            if (os.path.isfile("%s/train.%s_cosine_sim_stats_feat_by_relevance.feat.pkl" % (path, feat_name)) and
+                os.path.isfile("%s/train.%s_cosine_sim_stats_feat_by_query_relevance.feat.pkl" % (path, feat_name)) and
+                os.path.isfile("%s/%s.%s_cosine_sim_stats_feat_by_relevance.feat.pkl" % (path, mode, feat_name)) and
+                os.path.isfile("%s/%s.%s_cosine_sim_stats_feat_by_query_relevance.feat.pkl" % (path, mode, feat_name))):
+                continue
+
             ## skip query part
             if column_name in ["product_title", "product_description"]:
                 print "generate %s stats feat for %s" % (vec_type, column_name)
@@ -144,11 +169,11 @@ def extract_feat(path, dfTrain, dfTest, mode, feat_names, column_names):
                 cosine_sim_stats_feat_by_relevance_train = generate_dist_stats_feat("cosine", X_train, dfTrain["id"].values,
                                                                     X_train, dfTrain["id"].values,
                                                                     relevance_indices_dict)
+                with open("%s/train.%s_cosine_sim_stats_feat_by_relevance.feat.pkl" % (path, feat_name), "wb") as f:
+                    cPickle.dump(cosine_sim_stats_feat_by_relevance_train, f, -1)
                 cosine_sim_stats_feat_by_query_relevance_train = generate_dist_stats_feat("cosine", X_train, dfTrain["id"].values,
                                                                             X_train, dfTrain["id"].values,
                                                                             query_relevance_indices_dict, dfTrain["qid"].values)
-                with open("%s/train.%s_cosine_sim_stats_feat_by_relevance.feat.pkl" % (path, feat_name), "wb") as f:
-                    cPickle.dump(cosine_sim_stats_feat_by_relevance_train, f, -1)
                 with open("%s/train.%s_cosine_sim_stats_feat_by_query_relevance.feat.pkl" % (path, feat_name), "wb") as f:
                     cPickle.dump(cosine_sim_stats_feat_by_query_relevance_train, f, -1)
                 ## test
@@ -175,6 +200,10 @@ def extract_feat(path, dfTrain, dfTest, mode, feat_names, column_names):
         for j in range(i+1,len(feat_names)):
             print "generate common %s cosine sim feat for %s and %s" % (vec_type, feat_names[i], feat_names[j])
             for mod in ["train", mode]:
+
+                if os.path.isfile("%s/%s.%s_%s_%s_cosine_sim.feat.pkl" % (path, mod, feat_names[i], feat_names[j], vec_type)):
+                    continue
+
                 with open("%s/%s.%s.feat.pkl" % (path, mod, feat_names[i]), "rb") as f:
                     target_vec = cPickle.load(f)
                 with open("%s/%s.%s.feat.pkl" % (path, mod, feat_names[j]), "rb") as f:
@@ -200,6 +229,12 @@ def extract_feat(path, dfTrain, dfTest, mode, feat_names, column_names):
             X_vec_all_train = vstack([X_vec_all_train, X_vec_train])
 
     for n_components in svd_n_components:
+
+        if (os.path.isfile("%s/train.%s_common_svd%d.feat.pkl" % (path, feat_name, n_components)) and
+            os.path.isfile("%s/%s.%s_common_svd%d.feat.pkl" % (path, mode, feat_name, n_components))):
+            continue
+
+
         svd = TruncatedSVD(n_components=n_components, n_iter=15)
         svd.fit(X_vec_all_train)
         ## load bow/tfidf (for less coding...)
@@ -224,6 +259,13 @@ def extract_feat(path, dfTrain, dfTest, mode, feat_names, column_names):
                 ## bow/tfidf-svd cosine sim stats feat ##
                 #####################################
                 if column_name in ["product_title", "product_description"]:
+
+                    if (os.path.isfile("%s/train.%s_common_svd%d_cosine_sim_stats_feat_by_relevance.feat.pkl" % (path, feat_name, n_components)) and
+                        os.path.isfile("%s/train.%s_common_svd%d_cosine_sim_stats_feat_by_query_relevance.feat.pkl" % (path, feat_name, n_components)) and 
+                        os.path.isfile("%s/%s.%s_common_svd%d_cosine_sim_stats_feat_by_relevance.feat.pkl" % (path, mode, feat_name, n_components)) and
+                        os.path.isfile("%s/%s.%s_common_svd%d_cosine_sim_stats_feat_by_query_relevance.feat.pkl" % (path, mode, feat_name, n_components))):
+                        continue
+
                     print "generate common %s-svd%d stats feat for %s" % (vec_type, n_components, column_name)
                     ## train
                     cosine_sim_stats_feat_by_relevance_train = generate_dist_stats_feat("cosine", X_svd_train, dfTrain["id"].values,
@@ -260,6 +302,10 @@ def extract_feat(path, dfTrain, dfTest, mode, feat_names, column_names):
             for j in range(i+1,len(feat_names)):
                 print "generate common %s-svd%d cosine sim feat for %s and %s" % (vec_type, n_components, feat_names[i], feat_names[j])
                 for mod in ["train", mode]:
+
+                    if os.path.isfile("%s/%s.%s_%s_%s_common_svd%d_cosine_sim.feat.pkl" % (path, mod, feat_names[i], feat_names[j], vec_type, n_components)):
+                        continue
+
                     with open("%s/%s.%s_common_svd%d.feat.pkl" % (path, mod, feat_names[i], n_components), "rb") as f:
                         target_vec = cPickle.load(f)
                     with open("%s/%s.%s_common_svd%d.feat.pkl" % (path, mod, feat_names[j], n_components), "rb") as f:
@@ -276,6 +322,11 @@ def extract_feat(path, dfTrain, dfTest, mode, feat_names, column_names):
         #########################
         ## generate individual svd feat
         for feat_name,column_name in zip(feat_names, column_names):
+
+            if (os.path.isfile("%s/train.%s_individual_svd%d.feat.pkl" % (path, feat_name, n_components)) and
+                os.path.isfile("%s/%s.%s_individual_svd%d.feat.pkl" % (path, mode, feat_name, n_components))):
+                continue
+
             print "generate individual %s-svd%d feat for %s" % (vec_type, n_components, column_name)
             with open("%s/train.%s.feat.pkl" % (path, feat_name), "rb") as f:
                 X_vec_train = cPickle.load(f)
@@ -296,6 +347,13 @@ def extract_feat(path, dfTrain, dfTest, mode, feat_names, column_names):
                 ## bow/tfidf-svd cosine sim stats feat ##
                 #########################################
                 if column_name in ["product_title", "product_description"]:
+
+                    if (os.path.isfile("%s/train.%s_individual_svd%d_cosine_sim_stats_feat_by_relevance.feat.pkl" % (path, feat_name, n_components)) and
+                        os.path.isfile("%s/train.%s_individual_svd%d_cosine_sim_stats_feat_by_query_relevance.feat.pkl" % (path, feat_name, n_components)) and
+                        os.path.isfile("%s/%s.%s_individual_svd%d_cosine_sim_stats_feat_by_relevance.feat.pkl" % (path, mode, feat_name, n_components)) and
+                        os.path.isfile("%s/%s.%s_individual_svd%d_cosine_sim_stats_feat_by_query_relevance.feat.pkl" % (path, mode, feat_name, n_components))):
+                        continue
+
                     print "generate individual %s-svd%d stats feat for %s" % (vec_type, n_components, column_name)
                     ## train
                     cosine_sim_stats_feat_by_relevance_train = generate_dist_stats_feat("cosine", X_svd_train, dfTrain["id"].values,
@@ -424,7 +482,7 @@ if __name__ == "__main__":
 
     for vec_type in vec_types:
         ## save feat names
-        feat_names = [ "query", "title", "description" ]
+        feat_names = [ "query", "product_title", "product_description" ]
         feat_names = [ name+"_%s_%s_vocabulary" % (vec_type, vocabulary_type) for name in feat_names ]
         ## file to save feat names
         feat_name_file = "%s/basic_%s_and_cosine_sim.feat_name" % (config.feat_folder, vec_type)
@@ -435,26 +493,24 @@ if __name__ == "__main__":
         print("==================================================")
         print("Generate basic %s features..." % vec_type)
 
-        print("For cross-validation...")
-        for run in range(config.n_runs):
-            ## use 33% for training and 67 % for validation
-            ## so we switch trainInd and validInd
-            for fold, (validInd, trainInd) in enumerate(skf[run]):
-                print("Run: %d, Fold: %d" % (run+1, fold+1))
-                path = "%s/Run%d/Fold%d" % (config.feat_folder, run+1, fold+1)
+        # print("For cross-validation...")
+        # for run in range(config.n_runs):
+        #     ## use 33% for training and 67 % for validation
+        #     ## so we switch trainInd and validInd
+        #     for fold, (validInd, trainInd) in enumerate(skf[run]):
+        #         print("Run: %d, Fold: %d" % (run+1, fold+1))
+        #         path = "%s/Run%d/Fold%d" % (config.feat_folder, run+1, fold+1)
                 
-                dfTrain2 = dfTrain.iloc[trainInd].copy()
-                dfValid = dfTrain.iloc[validInd].copy()
-                ## extract feat
-                extract_feat(path, dfTrain2, dfValid, "valid", feat_names, column_names)
+        #         dfTrain2 = dfTrain.iloc[trainInd].copy()
+        #         dfValid = dfTrain.iloc[validInd].copy()
+        #         ## extract feat
+        #         extract_feat(path, dfTrain2, dfValid, "valid", feat_names, column_names)
 
-        print("Done.")
+        # print("Done.")
 
         print("For training and testing...")
         path = "%s/All" % config.feat_folder
-        ## extract feat
+        print "Extracting features..."
         feat_names = extract_feat(path, dfTrain, dfTest, "test", feat_names, column_names)
-        ## dump feat name
         dump_feat_name(feat_names, feat_name_file)
-
         print("All Done.")

@@ -84,7 +84,7 @@ def gen_info(feat_path_name):
             ######################
             ## get and dump cdf ##
             ######################
-            hist = np.bincount(Y[trainInd])
+            hist = np.bincount(Y[trainInd].astype('int64'))
             overall_cdf_valid = np.cumsum(hist) / float(sum(hist))
             np.savetxt("%s/valid.cdf" % path, overall_cdf_valid)
                 
@@ -108,7 +108,7 @@ def gen_info(feat_path_name):
     np.savetxt("%s/%s/All/train.feat.group" % (config.feat_folder, feat_path_name), [dfTrain.shape[0]], fmt="%d")
     np.savetxt("%s/%s/All/test.feat.group" % (config.feat_folder, feat_path_name), [dfTest.shape[0]], fmt="%d")
     ## cdf
-    hist_full = np.bincount(Y)
+    hist_full = np.bincount(Y.astype('int64'))
     print (hist_full) / float(sum(hist_full))
     overall_cdf_full = np.cumsum(hist_full) / float(sum(hist_full))
     np.savetxt("%s/%s/All/test.cdf" % (config.feat_folder, feat_path_name), overall_cdf_full)
