@@ -1,0 +1,16 @@
+No such file or directory: '../../Feat/solution/All/train.title_tfidf_common_vocabulary_cosine_sim_stats_feat_by_relevance.feat.pkl'
+
+File found in:
+combine_feat_[LSA_and_stats_feat_Jun09]_[Low].py:        ('title_tfidf_common_vocabulary_cosine_sim_stats_feat_by_relevance', SimpleTransform()),
+combine_feat_[LSA_svd150_and_Jaccard_coef_Jun14]_[Low].py:        ('title_tfidf_common_vocabulary_cosine_sim_stats_feat_by_relevance', SimpleTransform()),
+combine_feat_[svd100_and_bow_Jun23]_[Low].py:        ('title_tfidf_common_vocabulary_cosine_sim_stats_feat_by_relevance', SimpleTransform()),
+combine_feat_[svd100_and_bow_Jun27]_[High].py:        ('title_tfidf_common_vocabulary_cosine_sim_stats_feat_by_relevance', SimpleTransform()),
+
+No such file or directory: '../../Feat/solution/All/train.query_tfidf_common_vocabulary_individual_svd100.feat.pkl'
+
+Traceback (most recent call last):
+  File "genFeat_basic_tfidf_feat.py", line 506, in <module>
+    feat_names = extract_feat(path, dfTrain, dfTest, "test", feat_names, column_names)
+  File "genFeat_basic_tfidf_feat.py", line 265, in extract_feat
+    relevance_indices_dict)
+UnboundLocalError: local variable 'relevance_indices_dict' referenced before assignment
