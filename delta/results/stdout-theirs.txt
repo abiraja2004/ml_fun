@@ -1,0 +1,173 @@
+### SETUP PROCESS STARTED ###
+---
+Using saved GitHub credentials.
+---
+
+### SETUP PROCESS FINISHED ###
+
+R version 3.1.1 (2014-07-10) -- "Sock it to Me"
+Copyright (C) 2014 The R Foundation for Statistical Computing
+Platform: x86_64-pc-linux-gnu (64-bit)
+
+R is free software and comes with ABSOLUTELY NO WARRANTY.
+You are welcome to redistribute it under certain conditions.
+Type 'license()' or 'licence()' for distribution details.
+
+R is a collaborative project with many contributors.
+Type 'contributors()' for more information and
+'citation()' on how to cite R or R packages in publications.
+
+Type 'demo()' for some demos, 'help()' for on-line help, or
+'help.start()' for an HTML browser interface to help.
+Type 'q()' to quit R.
+
+> ## =============================================================================
+> ## R + H2O + Domino Stater Code
+> ## =============================================================================
+> 
+> ## Data Source: https://www.kaggle.com/c/afsis-soil-properties
+> 
+> ## ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+> ## Install Domino Bleeding Edge Version on Domino
+> ## ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+> 
+> ## Specify H2O version here
+> h2o_ver <- "1751"
+> 
+> ## Install H2O
+> local({r <- getOption("repos"); r["CRAN"] <- "http://cran.us.r-project.org"; options(repos = r)})
+> txt_repo <- (c(paste0(paste0("http://s3.amazonaws.com/h2o-release/h2o/master/",
++                              h2o_ver),"/R"),
++                getOption("repos")))
+> install.packages("h2o", repos = txt_repo, quiet = TRUE)
+> 
+> 
+> ## ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+> ## Initiate and Connect to a Local H2O Cluster on Domino
+> ## ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+> 
+> library(h2o)
+Loading required package: statmod
+Loading required package: survival
+Loading required package: splines
+
+----------------------------------------------------------------------
+
+Your next step is to start H2O and get a connection object (named
+'localH2O', for example):
+    > localH2O = h2o.init()
+
+For H2O package documentation, ask for help:
+    > ??h2o
+
+After starting H2O, you can use the Web UI at http://localhost:54321
+For more information visit http://docs.0xdata.com
+
+----------------------------------------------------------------------
+
+
+Attaching package: 'h2o'
+
+The following objects are masked from 'package:base':
+
+    ifelse, max, min, strsplit, sum, tolower, toupper
+
+> localH2O <- h2o.init(max_mem_size = '8g') ## using a max 1GB of RAM
+
+H2O is not running yet, starting it now...
+
+Note:  In case of errors look at the following log files:
+    /tmp/RtmphPPNDm/h2o_ubuntu_started_from_r.out
+    /tmp/RtmphPPNDm/h2o_ubuntu_started_from_r.err
+
+java version "1.7.0_65"
+OpenJDK Runtime Environment (IcedTea 2.5.2) (7u65-2.5.2-3~14.04)
+OpenJDK 64-Bit Server VM (build 24.65-b04, mixed mode)
+
+Successfully connected to http://127.0.0.1:54321 
+
+R is connected to H2O cluster:
+    H2O cluster uptime:         11 seconds 209 milliseconds 
+    H2O cluster version:        2.9.0.1751 
+    H2O cluster name:           H2O_started_from_R 
+    H2O cluster total nodes:    1 
+    H2O cluster total memory:   7.73 GB 
+    H2O cluster total cores:    1 
+    H2O cluster allowed cores:  2 
+    H2O cluster healthy:        TRUE 
+
+Note:  As started, H2O is limited to the CRAN default of 2 CPUs.
+       Shut down and restart H2O as shown below to use all your CPUs.
+           > h2o.shutdown(localH2O)
+           > localH2O = h2o.init(nthreads = -1)
+
+> 
+> 
+> ## ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+> ## Import Data
+> ## ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+> 
+> ## Get the local path on Domino
+> path_cloud <- getwd()
+> 
+> ## Define other paths
+> path_train <- paste0(path_cloud, "/data/train.zip")
+> path_test <- paste0(path_cloud, "/data/test.zip")
+> path_submission <- paste0(path_cloud, "/data/submission.csv")
+> path_output <- paste0(path_cloud, "/results/my_submission.csv")
+> 
+> ## Import Data to H2O Cluster
+> train_hex <- h2o.importFile(localH2O, path = path_train)
+  |                                                                              |                                                                      |   0%  |                                                                              |======================================================================| 100%
+> test_hex <- h2o.importFile(localH2O, path = path_test)
+  |                                                                              |                                                                      |   0%  |                                                                              |======================================================================| 100%
+> #raw_sub <- read.csv(path_submission)
+> 
+> 
+> ## ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+> ## Train a Deep Neural Networks model for each variable
+> ## ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+> 
+> ## Split the dataset into 80:20 for training and validation
+> train_hex_split <- h2o.splitFrame(train_hex, ratios = 0.8, shuffle = TRUE)
+> 
+> ## One Variable at at Time
+> ls_label <- c("gts_1", "dl_segs_yr1", "dl_seg_rev_yr1", "total_miles_flown_yr1")
+> 
+> for (n_label in 1:4) {
++ 
++   ## Display
++   cat("\n\nNow training a DNN model for", ls_label[n_label], "...\n")
++ 
++   ## Train a DNN
++   model <- h2o.deeplearning(x = 2:38,
++                             y = 3,
++                             data = train_hex_split[[1]],
++                             validation = train_hex_split[[2]],
++                             activation = "Rectifier",
++                             hidden = c(50, 50, 50),
++                             epochs = 100,
++                             classification = FALSE,
++                             balance_classes = FALSE)
++ 
++   ## Print the Model Summary
++   print(model)
++ 
++   ## Use the model for prediction and store the results in submission template
++   raw_sub[, (n_label + 1)] <- as.matrix(h2o.predict(model, test_hex))
++ 
++ }
+
+
+Now training a DNN model for gts_1 ...
+  |                                                                              |                                                                      |   0%  |                                                                              |===                                                                   |   4%  |                                                                              |=====                                                                 |   8%  |                                                                              |========                                                              |  11%  |                                                                              |===========                                                           |  15%  |                                                                              |=============                                                         |  19%  |                                                                              |================                                                      |  23%  |                                                                              |===================                                                   |  27%  |                                                                              |=====================                                                 |  31%  |                                                                              |========================                                              |  34%  |                                                                              |===========================                                           |  38%  |                                                                              |=============================                                         |  42%  |                                                                              |================================                                      |  46%  |                                                                              |===================================                                   |  50%  |                                                                              |======================================                                |  54%  |                                                                              |========================================                              |  57%  |                                                                              |===========================================                           |  61%  |                                                                              |==============================================                        |  65%  |                                                                              |================================================                      |  69%  |                                                                              |===================================================                   |  73%  |                                                                              |======================================================                |  77%  |                                                                              |========================================================              |  80%  |                                                                              |===========================================================           |  84%  |                                                                              |==============================================================        |  88%  |                                                                              |================================================================      |  92%  |                                                                              |===================================================================   |  96%  |                                                                              |======================================================================| 100%
+IP Address: 127.0.0.1 
+Port      : 54321 
+Parsed Data Key: train_shuffled_part0.hex 
+
+Deep Learning Model Key: DeepLearning_a15e212aae10ab6e3d77e0bfc9a1404f
+Training mean square error: 0.5808556
+Validation mean square error: 0.5842876Error in raw_sub[, (n_label + 1)] <- as.matrix(h2o.predict(model, test_hex)) : 
+  object 'raw_sub' not found
+[domino] Saving output of dump.frames to 'domino.last.dump.Rda'. You can load it with R's 'debugger' function to debug your script.
+[domino] Saving your workspace to 'domino.workspace.RData' in case you want to access your intermediate results.

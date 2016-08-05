@@ -1,0 +1,40 @@
+Variable,Description
+response_dt,"date customer responded (can be before survey_mail_date, see above)"
+pfl_fleet_typ_cd,Type of aircraft flown on trip associated with survey administration
+GTS_1,"Please rate your overall experience with Delta Air Lines: (1=very poor, 2 = poor, 3 = fair, 4 =  good, 5 = excellent)"
+GTS_12,"How satisfied were you with the boarding process?  (1=very dissatisfied, 2=dissatisfied, 3-neutral, 4=satisfied,5=very dissatisfied)"
+GTS_13,"Please rate the overall condition inside the boarding bridge:   (1=very poor, 2 = poor, 3 = fair, 4 =  good, 5 = excellent)"
+GTS_14,"Were you able to find enough onboard space for your carry-on item(s)? (1=yes, 0=no)"
+GTS_15,"Would you be willing to check your carry-on item(s) at the gate in order to avoid a delay on a future flight that is full? (1=yes, 2=no)"
+comped_med,"Member's tier is complementary (1 = yes, 0 = no)"
+natural_med,"Member's tier was earned naturally (1 = yes, 0 = no)"
+never_comped,"Member has never received a complementary upgrade in tier (1 = yes, 0 = no)"
+lapsed_med,"Member used to be a medallion (1 = yes, 0 = no)"
+Lesiure_tkts_yr1,Segments flown that fall under our lesiure trip intent logic - 2014
+Business_tkts_yr1,Segments flown that fall under ourbusiness trip intent logic - 2014
+total_ap_yr1,Advance Purchase Days total in 2014
+int_tkts_yr1,Tickets with either a true origin or destination that is international in 2014
+dom_tkts_yr1,Tickets with either a true origin or destination that is domestic in 2014
+dl_miles_flown_yr1,Total Delta Marketed Miles Flown in 2014
+dl_segs_yr1,Total Delta segments flown in 2014
+dl_seg_rev_yr1,Associated 2014 revenue for segments flown
+F_tkts_yr1,First class tickets flown in 2014
+F_tkt_rev_yr1,First class revenue in 2014
+F_miles_flown_yr1,Total First class miles flown in 2014
+C_tkts_yr1,C class tickets flown - 2014
+C_tkt_rev_yr1,C class revenue 2014
+C_miles_flown_yr1,C miles flown 2014
+Y_tkts_yr1,Y class tickets 2014
+Y_tkt_rev_yr1,Y class revenue 2014
+Y_miles_flown_yr1,Y class miles flown 2014
+F_upsell_tkts_yr1,First class upsell tickets 2014
+F_upsell_tkt_rev_yr1,first class upsell ticket revenue 2014
+F_upsell_miles_flown_yr1,first class upsell miles flown 2014
+total_miles_flown_yr1,total miles flown in 2014
+total_tkts_yr1,total tickets flown 2014
+total_tkt_rev_yr1,total ticket revenue 2014
+dist_partners,Distinct partners customer has been active with
+tenure,Member tenure in SkyMiles program (rounded to the nearest year)
+DSC_Entries,Entries to the Sky Club
+age,Experian provided age
+hhi,Experian provided household income (in thousands of dollars)

@@ -1,0 +1,94 @@
+### SETUP PROCESS STARTED ###
+---
+Using saved GitHub credentials.
+---
+
+### SETUP PROCESS FINISHED ###
+
+R version 3.1.1 (2014-07-10) -- "Sock it to Me"
+Copyright (C) 2014 The R Foundation for Statistical Computing
+Platform: x86_64-pc-linux-gnu (64-bit)
+
+R is free software and comes with ABSOLUTELY NO WARRANTY.
+You are welcome to redistribute it under certain conditions.
+Type 'license()' or 'licence()' for distribution details.
+
+R is a collaborative project with many contributors.
+Type 'contributors()' for more information and
+'citation()' on how to cite R or R packages in publications.
+
+Type 'demo()' for some demos, 'help()' for on-line help, or
+'help.start()' for an HTML browser interface to help.
+Type 'q()' to quit R.
+
+> # install version of H2O
+> #if ("package:h2o" %in% search()) { detach("package:h2o", unload=TRUE) }
+> #if ("h2o" %in% rownames(installed.packages())) { remove.packages("h2o") }
+> #install.packages("h2o", repos=(c("http://s3.amazonaws.com/h2o-release/h2o/master/1757/R", getOption("repos"))))
+> 
+> # load libraries
+> library(h2o)
+Loading required package: statmod
+Loading required package: survival
+Loading required package: splines
+
+----------------------------------------------------------------------
+
+Your next step is to start H2O and get a connection object (named
+'localH2O', for example):
+    > localH2O = h2o.init()
+
+For H2O package documentation, ask for help:
+    > ??h2o
+
+After starting H2O, you can use the Web UI at http://localhost:54321
+For more information visit http://docs.0xdata.com
+
+----------------------------------------------------------------------
+
+> library(stringr)
+
+Attaching package: 'h2o'
+
+The following objects are masked from 'package:base':
+
+    ifelse, max, min, strsplit, sum, tolower, toupper
+
+> 
+> # Connect to H2O server local or hosted (on each machine 'java -jar h2o.jar -Xmx4G -port 43322 -name ML_H2O')
+> #h2oServer <- h2o.init(ip="mr-0xd1", port = 43322)
+> h2oServer <- h2o.init(max_mem_size = '8g', nthreads = -1)
+
+H2O is not running yet, starting it now...
+
+Note:  In case of errors look at the following log files:
+    /tmp/Rtmp4iPUqY/h2o_ubuntu_started_from_r.out
+    /tmp/Rtmp4iPUqY/h2o_ubuntu_started_from_r.err
+
+java version "1.7.0_65"
+OpenJDK Runtime Environment (IcedTea 2.5.2) (7u65-2.5.2-3~14.04)
+OpenJDK 64-Bit Server VM (build 24.65-b04, mixed mode)
+
+Successfully connected to http://127.0.0.1:54321 
+
+R is connected to H2O cluster:
+    H2O cluster uptime:         9 seconds 586 milliseconds 
+    H2O cluster version:        2.8.4.4 
+    H2O cluster name:           H2O_started_from_R 
+    H2O cluster total nodes:    1 
+    H2O cluster total memory:   7.73 GB 
+    H2O cluster total cores:    1 
+    H2O cluster allowed cores:  1 
+    H2O cluster healthy:        TRUE 
+
+> 
+> # Import data
+> path_train <- "/data/train.zip"
+> path_test <- "/data/test.zip"
+> train_hex <- h2o.importFile(h2oServer, path = path_train)
+Error in .h2o.__remoteSend(object, .h2o.__PAGE_IMPORTFILES2, path = path) : 
+  http://127.0.0.1:54321/2/ImportFiles2.json  returned the following error:
+   File /data/train.zip does not exist!
+Calls: h2o.importFile -> h2o.importFolder -> .h2o.__remoteSend
+[domino] Saving output of dump.frames to 'domino.last.dump.Rda'. You can load it with R's 'debugger' function to debug your script.
+[domino] Saving your workspace to 'domino.workspace.RData' in case you want to access your intermediate results.
