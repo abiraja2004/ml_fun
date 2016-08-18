@@ -33,3 +33,13 @@ sci_bowl_2015/weights*
 
 santander_cs/data/*.csv
 santander_cs/data/*.zip
+.DS_Store
+.dropbox
+code_check*
+nohup.out
++*.pdf
+slides/01-Slides/cache
+slides/01-Slides/data
+slides/05-Slides/cache
+
+
