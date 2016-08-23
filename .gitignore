@@ -45,4 +45,4 @@ slides/05-Slides/cache
 *.tsv
 *.graphml
 
-deep/data/imagenet_model/objects.bin*
+deep/dato/data/imagenet_model/objects.bin*
