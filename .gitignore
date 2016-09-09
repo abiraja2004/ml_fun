@@ -46,3 +46,5 @@ slides/05-Slides/cache
 *.graphml
 
 deep/dato/data/imagenet_model/objects.bin*
+
+axa_telematics/
