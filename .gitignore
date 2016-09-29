@@ -48,3 +48,5 @@ slides/05-Slides/cache
 deep/dato/data/imagenet_model/objects.bin*
 
 axa_telematics/
+
+deep/lstm_activity/data/UCI\ HAR\ Dataset/

@@ -10,7 +10,7 @@ print("")
 print("Downloading...")
 if not os.path.exists("UCI HAR Dataset.zip"):
     call(
-        'wget "https://archive.ics.uci.edu/ml/machine-learning-databases/00240/UCI HAR Dataset.zip"',
+        'wget --no-check-certificate "https://archive.ics.uci.edu/ml/machine-learning-databases/00240/UCI HAR Dataset.zip"',
         shell=True
     )
     print("Downloading done.\n")
