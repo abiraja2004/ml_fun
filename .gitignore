@@ -54,3 +54,5 @@ deep/lstm_activity/data/UCI\ HAR\ Dataset/
 deep/lstm_activity/UCI HAR Dataset.zip
 
 deep/keras/data/vgg16_weights.h5
+
+deep/lstm_activity/data/actitracker_raw.txt
