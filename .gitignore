@@ -49,9 +49,9 @@ deep/dato/data/imagenet_model/objects.bin*
 
 axa_telematics/
 
-deep/lstm_activity/data/UCI\ HAR\ Dataset/
+deep/human_activity/data/UCI\ HAR\ Dataset/
 
-deep/lstm_activity/UCI HAR Dataset.zip
+deep/human_activity/UCI HAR Dataset.zip
 
 examples/vgg16_weights.h5
 
