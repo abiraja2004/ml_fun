@@ -55,4 +55,4 @@ deep/human_activity/UCI HAR Dataset.zip
 
 examples/vgg16_weights.h5
 
-deep/lstm_activity/data/actitracker_raw.txt
+deep/human_activity/data/actitracker_raw.txt
