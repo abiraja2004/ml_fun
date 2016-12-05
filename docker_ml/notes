@@ -2,22 +2,31 @@
 docker-machine create \
  --driver amazonec2 \
  --amazonec2-instance-type p2.xlarge \
- --amazonec2-ami ami-7cb9896b \
- aws_gpu_01
+ --amazonec2-vpc-id $AWS_VPC_ID \
+ --amazonec2-access-key $AWS_ACCESS_KEY_ID \
+ --amazonec2-secret-key $AWS_SECRET_ACCESS_KEY \
+awsgpu01
 
-# login to machine directly
-docker-machine ssh nvidia-docker
+ --amazonec2-ami ami-7cb9896b \
+
+# set env
+docker-machine env awsgpu01
+eval `docker-machine env awsgpu01`
 
 # run docker commands on instance
-docker-machine ip nvidia-docker
-docker-machine inspect nvidia-docker
-docker run -d -p 8000:80 --name webserver kitematic/hello-world-nginx
-
-# goto host to see port
-http://<host_ip>:8000
+docker-machine ip awsgpu01
+docker-machine inspect awsgpu01
 
 # open ports
-# only way I know to do this right now is via nvidia-docker 'Security Group' at AWS EC2 Console
+# only way I know to do this right now is via 'Security Group' at AWS EC2 Console on docker-machine group
+
+# build image
+docker build -f Dockerfile.gpu .
+
+# login to machine directly
+docker-machine ssh awsgpu01
+nvidia-smi
+ls /dev | grep nvidia
 
 # setup notebook
 nvidia-docker run \
@@ -30,5 +39,5 @@ nvidia-docker run \
  sh -c "jupyter notebook --ip=0.0.0.0 --no-browser --notebook-dir='/notebooks'"
 
 # close and kill
-docker-machine stop nvidia-docker
-docker-machine rm -f nvidia-docker
+docker-machine stop awsgpu01
+docker-machine rm -f awsgpu01
