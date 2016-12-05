@@ -1,0 +1,34 @@
+# build docker instance
+docker-machine create \
+ --driver amazonec2 \
+ --amazonec2-instance-type p2.xlarge \
+ --amazonec2-ami ami-7cb9896b \
+ aws_gpu_01
+
+# login to machine directly
+docker-machine ssh nvidia-docker
+
+# run docker commands on instance
+docker-machine ip nvidia-docker
+docker-machine inspect nvidia-docker
+docker run -d -p 8000:80 --name webserver kitematic/hello-world-nginx
+
+# goto host to see port
+http://<host_ip>:8000
+
+# open ports
+# only way I know to do this right now is via nvidia-docker 'Security Group' at AWS EC2 Console
+
+# setup notebook
+nvidia-docker run \
+ -it --rm \
+ -p 8888:8888 \
+ -p 6006:6006 \
+ -v /notebooks \
+ -v /home/kcavagnolo/ml_fun:/notebooks \
+ floydhub/dl-docker:gpu \
+ sh -c "jupyter notebook --ip=0.0.0.0 --no-browser --notebook-dir='/notebooks'"
+
+# close and kill
+docker-machine stop nvidia-docker
+docker-machine rm -f nvidia-docker
