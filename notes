@@ -1,0 +1,6 @@
+# build docker instance
+docker-machine create --driver amazonec2 --amazonec2-instance-type p2.xlarge --amazonec2-region us-east-1 --amazonec2-zone=b nvidia-docker
+
+# login
+docker-machine ssh nvidia-docker
+
