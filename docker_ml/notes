@@ -1,43 +1,49 @@
 # build docker instance
-docker-machine create \
- --driver amazonec2 \
- --amazonec2-instance-type p2.xlarge \
- --amazonec2-vpc-id $AWS_VPC_ID \
- --amazonec2-access-key $AWS_ACCESS_KEY_ID \
- --amazonec2-secret-key $AWS_SECRET_ACCESS_KEY \
-awsgpu01
+docker-machine create --driver amazonec2 \
+	       	      --amazonec2-instance-type p2.xlarge \
+		      --amazonec2-vpc-id $AWS_VPC_ID \
+		      --amazonec2-access-key $AWS_ACCESS_KEY_ID \
+		      --amazonec2-secret-key $AWS_SECRET_ACCESS_KEY \
+		      awsgpu01
 
-#--amazonec2-ami ami-7cb9896b \
+# SSH into the machine
+docker-machine ssh awsgpu01
 
 # set env
 docker-machine env awsgpu01
 eval `docker-machine env awsgpu01`
 
-# run docker commands on instance
+# check on instance
 docker-machine ip awsgpu01
 docker-machine inspect awsgpu01
 
-# open ports
-# only way I know to do this right now is via 'Security Group' at AWS EC2 Console on docker-machine group
-
 # build image
-#docker build -f Dockerfile.gpu .
+docker build -t kcavagnolo/dsci-ml:latest -f Dockerfile.gpu .
+
+# push to repo
+docker login
+docker push kcavagnolo/dsci-ml:latest
 
 # login to machine directly
-#docker-machine ssh awsgpu01
-#nvidia-smi
-#ls /dev | grep nvidia
+docker-machine ssh awsgpu01
+nvidia-smi
+ls /dev | grep nvidia
 
 # setup notebook
-#nvidia-docker run \
-# -it --rm \
-# -p 8888:8888 \
-# -p 6006:6006 \
-# -v /notebooks \
-# -v /home/kcavagnolo/ml_fun:/notebooks \
-# floydhub/dl-docker:gpu \
-# sh -c "jupyter notebook --ip=0.0.0.0 --no-browser --notebook-dir='/notebooks'"
+nvidia-docker run \
+ -it --rm -d \
+ -p 8888:8888 \
+ -p 6006:6006 \
+ -v /notebooks \
+ -v /home/kcavagnolo/ml_fun:/notebooks \
+ kcavagnolo/dsci-ml \
+ sh -c "jupyter notebook --ip=0.0.0.0 --no-browser --notebook-dir='/notebooks'"
 
-# close and kill
-#docker-machine stop awsgpu01
-#docker-machine rm -f awsgpu01
+# clean-up
+docker stop $(docker ps -a -q)
+docker rm $(docker ps -a -q)
+docker rmi $(docker images -a -q)
+
+# close and kill instance
+docker-machine stop awsgpu01
+docker-machine rm -f awsgpu01
