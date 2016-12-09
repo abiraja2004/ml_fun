@@ -1,25 +1,31 @@
 # build docker instance
 docker-machine -D create --driver amazonec2 \
 --amazonec2-instance-type p2.xlarge \
+--amazonec2-region us-east-1 \
+--amazonec2-zone c \
+--amazonec2-retries 50 \
 --amazonec2-vpc-id $AWS_VPC_ID \
 --amazonec2-access-key $AWS_ACCESS_KEY_ID \
 --amazonec2-secret-key $AWS_SECRET_ACCESS_KEY \
 awsgpu01
 
---amazonec2-region us-east-1 \
---amazonec2-zone c \
---amazonec2-retries 50 \
-
-# SSH into the machine
-docker-machine ssh awsgpu01
-
-# set env
-docker-machine env awsgpu01
-eval `docker-machine env awsgpu01`
+# the create usually fails and docker doesn't load correctly
+docker-machine stop awsgpu01
+docker-machine start awsgpu01
+docker-machine regenerate-certs awsgpu01
 
 # check on instance
 docker-machine ip awsgpu01
 docker-machine inspect awsgpu01
+
+# SSH into the machine
+docker-machine ssh awsgpu01
+nvidia-smi
+ls /dev | grep nvidia
+
+# if the above works, then set env
+docker-machine env awsgpu01
+eval `docker-machine env awsgpu01`
 
 # build image
 docker build -t kcavagnolo/dsci-ml:latest -f Dockerfile.gpu .
@@ -28,16 +34,10 @@ docker build -t kcavagnolo/dsci-ml:latest -f Dockerfile.gpu .
 docker login
 docker push kcavagnolo/dsci-ml:latest
 
-# login to machine directly
-docker-machine ssh awsgpu01
-nvidia-smi
-ls /dev | grep nvidia
-
 # setup notebook
-nvidia-docker run \
+docker run \
  -it --rm -d \
  -p 8888:8888 \
- -p 6006:6006 \
  -v /notebooks \
  -v /home/kcavagnolo/ml_fun:/notebooks \
  kcavagnolo/dsci-ml \
@@ -46,8 +46,8 @@ nvidia-docker run \
 # clean-up
 docker stop $(docker ps -a -q)
 docker rm $(docker ps -a -q)
-docker rmi $(docker images -a -q)
 
 # close and kill instance
+docker rmi $(docker images -a -q)
 docker-machine stop awsgpu01
 docker-machine rm -f awsgpu01
