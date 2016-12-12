@@ -56,3 +56,5 @@ deep/human_activity/UCI HAR Dataset.zip
 examples/vgg16_weights.h5
 
 deep/human_activity/data/actitracker_raw.txt
+
+h2o_ml/nodes-p*
