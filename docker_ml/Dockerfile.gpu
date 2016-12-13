@@ -5,6 +5,7 @@ FROM nvidia/cuda:8.0-cudnn5-devel
 MAINTAINER Ken Cavagnolo <ken@kcavagnolo.com>
 
 # set env
+ARG RSTUDIO_VERSION=1.0.44
 ARG THEANO_VERSION=rel-0.8.2
 ARG TENSORFLOW_VERSION=0.12.0rc0
 ARG KERAS_VERSION=1.1.1
@@ -24,18 +25,28 @@ RUN \
   do-release-upgrade && \
   apt-get update -q -y && \
   apt-get install -y --no-install-recommends \
-  	 bc build-essential cmake curl e2fslibs-dev emacs g++ gcc \
-	 gfortran git graphviz libatlas-base-dev libatlas3-base libffi-dev \
-	 libfreetype6-dev libhdf5-dev libjpeg-dev liblcms2-dev libopenblas-base \
-	 libopenblas-dev liblapack-dev libpng12-dev libssl-dev libtiff5-dev libwebp-dev \
-	 libzmq3-dev libboost-all-dev libgflags-dev libgoogle-glog-dev libhdf5-serial-dev libleveldb-dev \
-	 liblmdb-dev libopencv-dev libprotobuf-dev libsnappy-dev libblkid-dev libboost-all-dev \
-	 libaudit-dev libcurl4-gnutls-dev libxml2-dev nano protobuf-compiler pkg-config \
- 	 python-dev python-flask python-numpy python-scipy python-nose python-h5py python-skimage \
-	 python-matplotlib python-pandas python-pip python-sklearn python-software-properties \
-	 python-sympy python-all-dev python-opencv python-pil python-protobuf python-flaskext.wtf \
-	 python-gevent software-properties-common unzip vim wget zlib1g-dev &&\
-  update-alternatives --set libblas.so.3 /usr/lib/openblas-base/libblas.so.3 && \
+  	  bc build-essential ca-certificates cmake curl e2fslibs-dev emacs g++ \
+	  gcc gfortran git graphviz libatlas-base-dev libatlas3-base libffi-dev \
+	  libjasper-runtime libfreetype6 libfreetype6-dev libhdf5-dev \
+	  libjpeg62-dev libjpeg8 libjpeg-dev liblcms2-dev libopenblas-base make \
+	  libopenblas-dev liblapack-dev libpng12-dev libssl-dev libtiff5-dev \
+	  libwebp-dev libzmq3-dev libboost-all-dev libgflags-dev \
+	  libgoogle-glog-dev libhdf5-serial-dev libleveldb-dev liblmdb-dev \
+	  libopencv-dev libprotobuf-dev libsnappy-dev libblkid-dev \
+	  libboost-all-dev libaudit-dev libcurl4-gnutls-dev libxml2-dev maven \
+	  nano nginx protobuf-compiler pkg-config python-dev python-flask \
+	  python-numpy python-scipy python-nose python-h5py python-skimage \
+	  python-matplotlib python-pandas python-pip python-sklearn \
+	  python-imaging python-software-properties python-sympy python-all-dev \
+	  python-opencv python-pil python-protobuf python-flaskext.wtf \
+	  python-gevent python-yaml software-properties-common swig unzip vim \
+	  wget zlib1g-dev && \
+  update-alternatives --set libblas.so.3 /usr/lib/openblas-base/libblas.so.3 && \  
+  useradd rstudio && \
+  echo "rstudio:rstudio" | chpasswd && \
+  mkdir /home/rstudio && \
+  chown rstudio:rstudio /home/rstudio && \
+  addgroup rstudio staff && \
   apt-get clean && \
   apt-get autoremove -y && \
   rm -rf /var/lib/apt/lists/*
@@ -60,8 +71,6 @@ RUN \
   apt-get install -y --no-install-recommends --upgrade \
   	  r-base r-base-dev r-cran-littler \
 	  libapparmor1 gdebi-core && \
-  wget https://download2.rstudio.org/rstudio-server-1.0.44-amd64.deb && \
-  gdebi -n rstudio-server-1.0.44-amd64.deb && \
   install.r abind acepack AER aod aplpack arm arules arulesViz \
     assertthat automap base64enc BH biglm bit bit64 bitops brew broom car \
     caret caTools chron clusterGeneration coda colorspace combinat config \
@@ -93,17 +102,34 @@ RUN \
     stringr tcltk2 testthat TH.data tibble tidyr timeDate translations \
     trimcluster tseries TSP TTR twitteR UScensus2010 V8 vcd VGAM viridis \
     viridisLite visNetwork whisker withr xgboost xlsx xlsxjars XML xml2 \
-    xtable xts yaml zoo RODBC RMySQL RPostgresSQL RSQLite XLConnect xlsx \
+    xtable xts yaml zoo RMySQL RPostgresSQL RSQLite XLConnect xlsx \
     foreign dplyr tidyr stringr lubridate ggplot2 graphics ggvis rgl \
     htmlwidgets leaflet dygraphs DT diagrammeR network3D threeJS googlevis \
     car mgcv lme4 nlme randomForest multcomp vcd glmnet survival caret \
-    shiny xtable sp maptools maps ggmap zoo xts quantmod Rcpp data.table \
+    xtable sp maptools maps ggmap zoo xts quantmod Rcpp data.table \
     parallel XML jsonlite httr devtools testthat roxygen2 && \
+  wget https://download2.rstudio.org/rstudio-server-${RSTUDIO_VERSION}-amd64.deb && \
+  gdebi -n rstudio-server-${RSTUDIO_VERSION}-amd64.deb && \
+  wget --no-verbose https://s3.amazonaws.com/rstudio-shiny-server-os-build/ubuntu-12.04/x86_64/VERSION -O "version.txt" && \
+  VERSION=$(cat version.txt)  && \
+  wget --no-verbose "https://s3.amazonaws.com/rstudio-shiny-server-os-build/ubuntu-12.04/x86_64/shiny-server-$VERSION-amd64.deb" -O ss-latest.deb && \
+  gdebi -n ss-latest.deb && \
+  rm -f version.txt ss-latest.deb rstudio-server-${RSTUDIO_VERSION}-amd64.deb && \
+  cp -R /usr/local/lib/R/site-library/shiny/examples/* /srv/shiny-server/ && \
+  echo '\n\
+    \n# Configure httr to perform out-of-band authentication if HTTR_LOCALHOST \
+    \n# is not set since a redirect to localhost may not work depending upon \
+    \n# where this Docker container is running. \
+    \nif(is.na(Sys.getenv("HTTR_LOCALHOST", unset=NA))) { \
+    \n  options(httr_oob_default = TRUE) \
+    \n}' >> /etc/R/Rprofile.site && \
+  echo "server-app-armor-enabled=0" >> /etc/rstudio/rserver.conf && \
   apt-get clean && \
   apt-get autoremove -y && \
   rm -rf /var/lib/apt/lists/*
 
-# install tensorflow, caffe, java, h2o, theano, keras, lasagne, mxnet, chainer
+# install tensorflow, caffe, java, h2o, h2o.deepwater,
+# theano, keras, lasagne, mxnet, chainer
 RUN \
   pip --no-cache-dir install --upgrade \
   https://storage.googleapis.com/tensorflow/linux/gpu/tensorflow_gpu-${TENSORFLOW_VERSION}-cp27-none-linux_x86_64.whl && \
@@ -150,13 +176,15 @@ RUN \
 # config jupyter
 COPY jupyter_notebook_config.py /root/.jupyter/
 COPY run_jupyter.sh /root/
+COPY dsci_services.sh /usr/local/bin
 
 # open ports
-EXPOSE 6006
-EXPOSE 8787
-EXPOSE 8888
-EXPOSE 54321
-EXPOSE 54322
+EXPOSE 3838 6006 8787 8888 54321
+
+# run services
+RUN \
+  chmod +x /usr/local/bin/dsci_services.sh
+  /usr/local/bin/dsci_services.sh
 
 # set env
 WORKDIR "/root"
