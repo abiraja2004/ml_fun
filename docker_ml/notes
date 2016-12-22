@@ -51,3 +51,15 @@ docker rm $(docker ps -a -q)
 docker rmi $(docker images -a -q)
 docker-machine stop awsgpu01
 docker-machine rm -f awsgpu01
+
+# local
+docker-machine rm -f os-docker-test; clear
+docker-machine -D create --driver openstack \
+--openstack-flavor-name m2.xlarge \
+--openstack-image-name 'Ubuntu14.04-LTS-trusty-64bit-Server' \
+--openstack-floatingip-pool public \
+--openstack-sec-groups default \
+--openstack-domain-name default \
+--openstack-keypair-name cavagnok \
+--openstack-private-key-file '/home/kcavagnolo/.ssh/openstack.pem' \
+os-docker-test
