@@ -31,6 +31,9 @@ telstra/data/train_ksmod.csv
 sci_bowl_2015/data
 sci_bowl_2015/weights*
 
+sci_bowl_2017/data
+sci_bowl_2017/weights*
+
 santander_cs/data/*.csv
 santander_cs/data/*.zip
 .DS_Store
