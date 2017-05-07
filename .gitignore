@@ -48,16 +48,13 @@ slides/05-Slides/cache
 *.tsv
 *.graphml
 
-deep/dato/data/imagenet_model/objects.bin*
-
 axa_telematics/
-
-deep/human_activity/data/UCI\ HAR\ Dataset/
-
-deep/human_activity/UCI HAR Dataset.zip
-
 examples/vgg16_weights.h5
+h2o_ml/nodes-p*
 
+deep/dato_tutorial/data/imagenet_model/objects.bin*
+deep/human_activity/data/UCI\ HAR\ Dataset/
+deep/human_activity/UCI HAR Dataset.zip
 deep/human_activity/data/actitracker_raw.txt
 
-h2o_ml/nodes-p*
+
