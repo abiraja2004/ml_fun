@@ -52,9 +52,9 @@ axa_telematics/
 examples/vgg16_weights.h5
 h2o_ml/nodes-p*
 
-deep/dato_tutorial/data/imagenet_model/objects.bin*
-deep/human_activity/data/UCI\ HAR\ Dataset/
-deep/human_activity/UCI HAR Dataset.zip
-deep/human_activity/data/actitracker_raw.txt
+dato_tutorial/data/imagenet_model/objects.bin*
+human_activity/data/UCI\ HAR\ Dataset/
+human_activity/UCI HAR Dataset.zip
+human_activity/data/actitracker_raw.txt
 
 
