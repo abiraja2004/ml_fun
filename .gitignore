@@ -36,6 +36,10 @@ sci_bowl_2017/weights*
 
 santander_cs/data/*.csv
 santander_cs/data/*.zip
+
+zestimate/data/*.csv
+zestimate/data/*.xlsx
+
 .DS_Store
 .dropbox
 code_check*
