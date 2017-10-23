@@ -1,0 +1,323 @@
+2017-10-23 12:07:47,376 1.4GB 1 INFO   : -----------------------------------------------------------------
+2017-10-23 12:07:47,377 1.4GB 1 INFO   :      __ _____  ____        _    H2O.ai 1.0.4 (build 493)
+2017-10-23 12:07:47,378 1.4GB 1 INFO   :     / // /_  |/ __ \ ___ _(_)   
+2017-10-23 12:07:47,378 1.4GB 1 INFO   :    / _  / __// /_/ // _ `/ /    IP   : 172.17.0.2
+2017-10-23 12:07:47,379 1.4GB 1 INFO   :   /_//_/____/\____(_)_,_/_/     Port : 12345
+2017-10-23 12:07:47,380 1.4GB 1 INFO   :                                 PID  : 1
+2017-10-23 12:07:47,381 1.4GB 1 INFO   : -----------------------------------------------------------------
+2017-10-23 12:07:47,382 1.4GB 1 INFO   : App Version            : 1.0.4
+2017-10-23 12:07:47,382 1.4GB 1 INFO   : App Build              : 493
+2017-10-23 12:07:47,383 1.4GB 1 INFO   : App Address            : http://172.17.0.2:12345
+2017-10-23 12:07:47,384 1.4GB 1 INFO   : Python Version         : 3.6.2
+2017-10-23 12:07:47,385 1.4GB 1 INFO   : Python Implementation  : CPython
+2017-10-23 12:07:47,386 1.4GB 1 INFO   : Python Compiler        : GCC 5.4.0 20160609
+2017-10-23 12:07:47,387 1.4GB 1 INFO   : Python Build Number    : default
+2017-10-23 12:07:47,388 1.4GB 1 INFO   : Python Build Date      : Jul 17 2017 23:14:31
+2017-10-23 12:07:47,388 1.4GB 1 INFO   : System                 : Linux
+2017-10-23 12:07:47,389 1.4GB 1 INFO   : Node                   : c393e31d5a03
+2017-10-23 12:07:47,390 1.4GB 1 INFO   : Release                : 4.9.49-moby
+2017-10-23 12:07:47,390 1.4GB 1 INFO   : Version                : #1 SMP Wed Sep 27 23:17:17 UTC 2017
+2017-10-23 12:07:47,391 1.4GB 1 INFO   : Machine                : x86_64
+2017-10-23 12:07:47,391 1.4GB 1 INFO   : Processor              : x86_64
+2017-10-23 12:07:47,392 1.4GB 1 INFO   : -----------------------------------------------------------------
+2017-10-23 12:07:47,401 1.4GB 1 INFO   : License manager initialized
+2017-10-23 12:07:47,403 1.4GB 1 INFO   : -----------------------------------------------------------------
+2017-10-23 12:07:47,404 1.4GB 1 INFO   : Checking whether we have a valid license...
+2017-10-23 12:07:47,409 1.4GB 1 WARNING: [usage] |/exception/license/notfound|License not found|
+2017-10-23 12:07:47,411 1.4GB 1 WARNING: [event] |Exception|License not found|NA|0|
+2017-10-23 12:07:47,413 1.4GB 1 ERROR  : License file does not exist (/license/license.sig)
+2017-10-23 12:07:47,416 1.4GB 1 ERROR  : Please contact sales@h2o.ai
+2017-10-23 12:07:47,417 1.4GB 1 INFO   : -----------------------------------------------------------------
+2017-10-23 12:07:47,421 1.4GB 1 ERROR  : !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+2017-10-23 12:07:47,421 1.4GB 1 ERROR  : No valid license key found
+2017-10-23 12:07:47,422 1.4GB 1 ERROR  : !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+2017-10-23 12:07:47,422 1.4GB 1 INFO   : -----------------------------------------------------------------
+2017-10-23 12:07:47,423 1.4GB 1 INFO   : [usage] |/version/1.0.4|Software version|
+2017-10-23 12:07:47,473 1.4GB 1 INFO   : [usage] |/system/host/memory_in_gb/2|Host memory in GB|
+2017-10-23 12:07:47,474 1.4GB 1 INFO   : [event] |System|Host memory in GB|NA|2|
+2017-10-23 12:07:47,475 1.4GB 1 INFO   : [usage] |/system/host/num_cpus/2|Number of CPUs|
+2017-10-23 12:07:47,476 1.4GB 1 INFO   : [event] |System|Number of CPUs|NA|2|
+2017-10-23 12:07:47,477 1.4GB 1 INFO   : [usage] |/system/gpu/present/false|Whether GPUs are present|
+2017-10-23 12:07:47,478 1.4GB 1 INFO   : [event] |System|Whether GPUs are present|NA|0|
+2017-10-23 12:07:47,479 1.4GB 1 INFO   : [usage] |/system/gpu/num_gpus/0|Number of GPUs|
+2017-10-23 12:07:47,480 1.4GB 1 INFO   : [event] |System|Number of GPUs|NA|0|
+2017-10-23 12:07:47,481 1.4GB 1 INFO   : [usage] |/system/gpu/memory_in_gb/0|GPU memory in GB|
+2017-10-23 12:07:47,481 1.4GB 1 INFO   : [event] |System|GPU memory in GB|NA|0|
+2017-10-23 12:07:47,482 1.4GB 1 INFO   : [usage] |/system/gpu/gpu_type/NA|Type of GPUs if present|
+2017-10-23 12:07:47,483 1.4GB 1 INFO   : -----------------------------------------------------------------
+2017-10-23 12:07:47,484 1.4GB 1 INFO   : 
+
+PLEASE READ THIS H2O.AI DRIVERLESS AI EVALUATION AGREEMENT ('AGREEMENT') CAREFULLY BEFORE USING THE EVALUATION SOFTWARE OFFERED BY H2O.AI, INC. ('H2O.AI').  BY CLICKING THE 'AGREE' (OR SIMILAR) BUTTON ON AN ONLINE ORDER FORM, BY USING THE EVALUATION SOFTWARE IN ANY MANNER, OR BY SIGNING AN ORDER FORM WHICH REFERENCES THESE EVALUATION TERMS AND CONDITIONS (AS APPLICABLE) YOU OR THE ENTITY YOU REPRESENT ('LICENSEE') AGREE THAT YOU HAVE READ AND AGREE TO BE BOUND BY AND A PARTY TO THE TERMS AND CONDITIONS OF THIS AGREEMENT TO THE EXCLUSION OF ALL OTHER TERMS, YOU REPRESENT AND WARRANT THAT YOU ARE AUTHORIZED TO BIND LICENSEE.  IF THE TERMS OF THIS AGREEMENT ARE CONSIDERED AN OFFER, ACCEPTANCE IS EXPRESSLY LIMITED TO SUCH TERMS.
+
+H2O.AI DRIVERLESS AI EVALUATION AGREEMENT
+
+  WHEREAS, H2O.ai is willing to supply, within the protection of a confidential relationship, the software, services and related materials provided in connection with this Agreement (collectively, the 'Evaluation Software') to Licensee solely for internal evaluation purposes and not for any production use ('Evaluation');
+
+  NOW, THEREFORE, in consideration of the foregoing and the mutual covenants hereinafter set forth, the parties hereby agree as follows:
+      1. Use of Evaluation Software. Subject to the terms of this Agreement, H2O.ai hereby grants to Licensee a personal, nontransferable, nonsublicensable, nonexclusive, revocable license to access and use the Evaluation Software only in accordance with all documentation supplied by H2O.ai solely for Licensee's internal Evaluation purposes during the term of this Agreement. H2O.ai shall at all times retain all title to and ownership of the Evaluation Software and all intellectual property rights relating thereto. Licensee agrees to use the Evaluation Software only in the ordinary course of its Evaluation. Licensee shall not (and shall not allow any third party to): (a) decompile, disassemble, or otherwise reverse engineer any portion of the Evaluation Software; (b) remove, alter or obscure any product identification, copyright or other notices contained on or in the Evaluation Software; (c) disclose, provide, distribute, resell, lease, lend or allow access to the Evaluation Software to any third party; (d) use the Evaluation Software for timesharing or service bureau purposes, or otherwise for the benefit of any third party; (e) copy, modify, adapt or create a derivative work of any part of the Evaluation Software; (f) use the Evaluation Software in excess of any limitations provided by H2O.ai;(g) use the Evaluation Software to help develop any competitive product or service; (h) remove or export the Evaluation Software or any direct product thereof from the United States. H2O
+      2. Feedback. If Licensee proposes any modifications, derivatives, enhancements or improvements to the Evaluation Software ('Feedback'), then notwithstanding anything else, Licensee hereby grants H2O.ai a perpetual, irrevocable, royalty free, fully paid-up, sub-licensable, right and license to use, display, reproduce, distribute and otherwise fully exploit such Feedback for any purposes.
+      3. Warning. THE EVALUATION SOFTWARE MAY CONTAIN A ROUTINE THAT CAUSES THE EVALUATION SOFTWARE TO CEASE PROPER FUNCTIONING AFTER A CERTAIN PERIOD OF TIME. THIS MAY OCCUR BEFORE OR AFTER TERMINATION OF THE LICENSE, SO LICENSEE MUST BE PREPARED AT ALL TIMES AND MAY NOT RELY ON THE EVALUATION SOFTWARE
+      4. Warranty Disclaimer.  The parties acknowledge that the Evaluation Software are provided 'AS IS' and may not be functional on any machine or in any environment. H2O.AI DISCLAIMS ALL WARRANTIES RELATING TO THE EVALUATION SOFTWARE, EXPRESS OR IMPLIED, INCLUDING, BUT NOT LIMITED TO, ANY WARRANTIES AGAINST INFRINGEMENT OF THIRD-PARTY RIGHTS, MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE.
+      5. Limitation of Remedies and Damages. H2O.AI SHALL NOT BE RESPONSIBLE OR LIABLE TO THE OTHER PARTY WITH RESPECT TO ANY SUBJECT MATTER OF THIS AGREEMENT UNDER ANY CONTRACT, NEGLIGENCE, STRICT LIABILITY OR OTHER THEORY (A) FOR LOSS OR INACCURACY OF DATA OR COST OF PROCUREMENT OF SUBSTITUTE GOODS, SERVICES OR TECHNOLOGY, (B) FOR ANY SPECIAL, INDIRECT, INCIDENTAL, PUNITIVE, RELIANCE, OR CONSEQUENTIAL DAMAGES INCLUDING, BUT NOT LIMITED TO LOSS OF REVENUES AND LOSS OF PROFITS, OR (C) FOR DAMAGES OF ANY KIND WHATSOEVER ARISING OUT OF THIS AGREEMENT IN EXCESS OF $100. H2O.AI SHALL NOT BE RESPONSIBLE FOR ANY MATTER BEYOND ITS REASONABLE CONTROL.
+      6. Nonassignability. Although fully assignable and transferable by H2O.ai, neither the rights nor the obligations arising under this Agreement are assignable or transferable by Licensee, and any such attempted assignment or transfer shall be void and without effect.
+      7. Controlling Law, Attorneys' Fees and Severability. This Agreement shall be governed by and construed in accordance with the laws of the State of California without regard to the conflicts of laws provisions therein. In any action to enforce this Agreement the prevailing party will be entitled to costs and attorneys' fees. In the event that any of the provisions of this Agreement shall be held by a court or other tribunal of competent jurisdiction to be unenforceable, such provisions shall be limited or eliminated to the minimum extent necessary so that this Agreement shall otherwise remain in full force and effect and enforceable.
+      8. Entire Agreement. This Agreement constitutes the entire agreement between the parties pertaining to the subject matter hereof.  Any modifications of this Agreement must be in writing and signed by both parties.
+      9. Term; Termination. This Agreement shall become effective upon Licensee's first access to or use of the Evaluation Software ('Start Date'). This Agreement may be terminated by either party for any reason or no reason upon written notice to the other party, or immediately upon notice of any breach by Licensee of the provisions of this Agreement, and in any case will terminate twenty-one (21) days from the Start Date, unless extended by H2O.ai in writing.  Upon termination, the license granted hereunder will terminate and Licensee shall promptly cease accessing the Evaluation Software, and shall return any and all documents, notes and other materials regarding the Evaluation Software to H2O.ai, including, without limitation, all copies and extracts of the foregoing, but the terms of this Agreement will otherwise remain in effect.
+
+GDSVF&H\2472254.1
+
+
+
+2017-10-23 12:07:47,485 1.4GB 1 INFO   : -----------------------------------------------------------------
+2017-10-23 12:07:47,516 1.4GB 1 INFO   : Architecture:          x86_64
+2017-10-23 12:07:47,517 1.4GB 1 INFO   : CPU op-mode(s):        32-bit, 64-bit
+2017-10-23 12:07:47,517 1.4GB 1 INFO   : Byte Order:            Little Endian
+2017-10-23 12:07:47,518 1.4GB 1 INFO   : CPU(s):                2
+2017-10-23 12:07:47,518 1.4GB 1 INFO   : On-line CPU(s) list:   0,1
+2017-10-23 12:07:47,519 1.4GB 1 INFO   : Thread(s) per core:    1
+2017-10-23 12:07:47,520 1.4GB 1 INFO   : Core(s) per socket:    1
+2017-10-23 12:07:47,525 1.4GB 1 INFO   : Socket(s):             2
+2017-10-23 12:07:47,526 1.4GB 1 INFO   : Vendor ID:             GenuineIntel
+2017-10-23 12:07:47,527 1.4GB 1 INFO   : CPU family:            6
+2017-10-23 12:07:47,527 1.4GB 1 INFO   : Model:                 58
+2017-10-23 12:07:47,528 1.4GB 1 INFO   : Model name:            Intel(R) Core(TM) i5-3230M CPU @ 2.60GHz
+2017-10-23 12:07:47,528 1.4GB 1 INFO   : Stepping:              9
+2017-10-23 12:07:47,529 1.4GB 1 INFO   : CPU MHz:               2593.675
+2017-10-23 12:07:47,529 1.4GB 1 INFO   : BogoMIPS:              5454.52
+2017-10-23 12:07:47,530 1.4GB 1 INFO   : L1d cache:             32K
+2017-10-23 12:07:47,531 1.4GB 1 INFO   : L1i cache:             32K
+2017-10-23 12:07:47,531 1.4GB 1 INFO   : L2 cache:              256K
+2017-10-23 12:07:47,532 1.4GB 1 INFO   : L3 cache:              3072K
+2017-10-23 12:07:47,532 1.4GB 1 INFO   : Flags:                 fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush mmx fxsr sse sse2 ss ht pbe syscall nx lm constant_tsc rep_good nopl xtopology nonstop_tsc eagerfpu pni pclmulqdq dtes64 ds_cpl ssse3 cx16 xtpr pcid sse4_1 sse4_2 popcnt aes xsave avx f16c rdrand hypervisor lahf_lm fsgsbase erms xsaveopt arat
+2017-10-23 12:07:47,533 1.4GB 1 INFO   : 
+2017-10-23 12:07:47,533 1.4GB 1 INFO   : -----------------------------------------------------------------
+2017-10-23 12:07:47,552 1.4GB 1 INFO   : Quick Performance Benchmark:
+2017-10-23 12:07:48,479 1.4GB 1 INFO   : Disk Speed: 92.47 MB/s
+2017-10-23 12:07:56,086 1.3GB 1 INFO   : CPU Speed: 11.83 GFLOPS
+2017-10-23 12:07:56,566 1.3GB 1 INFO   : Memory Speed: 0.77 GB/s
+2017-10-23 12:07:56,569 1.3GB 1 WARNING: slow disk detected! (92.47 MB/s vs minimum recommended speed of 100.00 MB/s) - (please check whether an SSD is used)
+2017-10-23 12:07:56,571 1.3GB 1 WARNING: slow CPU detected! (11.83 GFLOPS vs minimum recommended speed of 20.00 GFLOPS) - (please check whether other jobs are running)
+2017-10-23 12:07:56,571 1.3GB 1 WARNING: slow memory detected! (0.77 GB/s vs minimum recommended speed of 5.00 GB/s) - (please check the system architecture)
+2017-10-23 12:07:56,572 1.3GB 1 INFO   : -----------------------------------------------------------------
+2017-10-23 12:07:56,572 1.3GB 1 INFO   :      Connect to Driverless AI:  http://172.17.0.2:12345
+2017-10-23 12:07:56,573 1.3GB 1 INFO   : -----------------------------------------------------------------
+2017-10-23 12:07:57,502 1.3GB 1 WARNING: 404 GET /favicon.ico (172.17.0.1) 2.64ms
+2017-10-23 12:08:16,517 1.2GB 1 INFO   : User logged in: h2oai
+2017-10-23 12:08:16,530 1.2GB 1 INFO   : Reload: user=h2oai, ip=172.17.0.1
+2017-10-23 12:08:17,134 1.2GB 1 INFO   : -----------------------------------------------------------------
+2017-10-23 12:08:17,135 1.2GB 1 INFO   : Checking whether we have a valid license...
+2017-10-23 12:08:17,138 1.2GB 1 WARNING: [usage] |/exception/license/notfound|License not found|
+2017-10-23 12:08:17,139 1.2GB 1 WARNING: [event] |Exception|License not found|NA|0|
+2017-10-23 12:08:17,144 1.2GB 1 ERROR  : License file does not exist (/license/license.sig)
+2017-10-23 12:08:17,145 1.2GB 1 ERROR  : Please contact sales@h2o.ai
+2017-10-23 12:08:17,146 1.2GB 1 INFO   : -----------------------------------------------------------------
+2017-10-23 12:08:17,475 1.2GB 1 INFO   : -----------------------------------------------------------------
+2017-10-23 12:08:17,476 1.2GB 1 INFO   : Checking whether we have a valid license...
+2017-10-23 12:08:17,479 1.2GB 1 WARNING: [usage] |/exception/license/notfound|License not found|
+2017-10-23 12:08:17,480 1.2GB 1 WARNING: [event] |Exception|License not found|NA|0|
+2017-10-23 12:08:17,481 1.2GB 1 ERROR  : License file does not exist (/license/license.sig)
+2017-10-23 12:08:17,482 1.2GB 1 ERROR  : Please contact sales@h2o.ai
+2017-10-23 12:08:17,483 1.2GB 1 INFO   : -----------------------------------------------------------------
+2017-10-23 12:08:26,000 1.2GB 1 INFO   : -----------------------------------------------------------------
+2017-10-23 12:08:26,007 1.2GB 1 INFO   : Checking whether we have a valid license...
+2017-10-23 12:08:26,011 1.2GB 1 WARNING: [usage] |/exception/license/notfound|License not found|
+2017-10-23 12:08:26,012 1.2GB 1 WARNING: [event] |Exception|License not found|NA|0|
+2017-10-23 12:08:26,015 1.2GB 1 ERROR  : License file does not exist (/license/license.sig)
+2017-10-23 12:08:26,016 1.2GB 1 ERROR  : Please contact sales@h2o.ai
+2017-10-23 12:08:26,016 1.2GB 1 INFO   : -----------------------------------------------------------------
+2017-10-23 12:11:18,791 1.2GB 71 INFO   : [usage] |/parse/start|Parse start|
+2017-10-23 12:11:18,793 1.2GB 71 INFO   : Parsing data: /data/nymex_no2_heatoil_nyharb_daily.csv
+  [1] Check arguments
+    Using 2 threads (omp_get_max_threads()=2, nth=0)
+    NAstrings = [<<NA>>]
+    None of the NAstrings look like numbers.
+    showProgress = 0
+  [2] Opening the file
+    Opening file /data/nymex_no2_heatoil_nyharb_daily.csv
+    File opened, size = 161.6KB (165440 bytes).
+    System memory page size: 4096B
+    File memory-mapped at address 0x7fac1c750000
+  [3] Detect and skip BOM
+  [4] Detect end-of-line character(s)
+    Detected eol as \r\n (CRLF) in that order, the Windows standard.
+  [5] Check for missing newline at the end of input
+    Last character in the file is not a newline, so EOF is temporarily moved 16 bytes backwards
+  [6] Skipping initial rows if needed
+    Positioned on line 1 starting: <<Day,New York Harbor No. 2 Heat>>
+  [7] Detect separator, quoting rule, and ncolumns
+    Detecting sep ...
+    sep=','  with 100 lines of 2 fields using quote rule 0
+    Detected 2 columns on line 1. This line is either column names or first data row. Line starts as: <<Day,New York Harbor No. 2 Heat>>
+    Quote rule picked = 0
+  [8] Determine column names
+    All the fields on line 1 are character fields. Treating as the column names.
+    Start-of-file pointer moved 63 bytes forward
+  [9] Detect column types
+    Number of sampling jump points = 11 because (165379 bytes from row 1 to eof) / (2 * 1803 jump0size) == 45
+    Type codes (jump 000)    : 96  Quote rule 0
+    Type codes (jump 010)    : 96  Quote rule 0
+    =====
+    Sampled 1052 rows (handled \n inside quoted fields) at 11 jump point(s)
+    Bytes from first data row on line 2 to the end of last row: 165379
+    Line length: mean=17.58 sd=0.58 min=15 max=18
+    Estimated number of rows: 165379 / 17.58 = 9406
+    Initial alloc = 10346 rows (9406 + 9%) using bytes/max(mean-2*sd,min) clamped between [1.1*estn, 2.0*estn]
+    =====
+  [10] Apply user overrides on column types
+    After 0 type and 0 drop user overrides : 96
+  [11] Allocate memory for the datatable
+    Allocating 2 column slots (2 - 0 dropped) with 10346 rows
+    The DataTable is estimated to require 171.8KB
+    Memory available = 1.201GB (out of 1.952GB)
+    DataTable will be loaded into memory
+  [12] Read the data
+    njumps=1 and chunkBytes=165379
+  [13] Finalizing the datatable
+  Read 9396 rows x 2 columns from 161.6KB (165440 bytes) file in 00:00.038 wall clock time (can be slowed down by any other open apps even if seemingly idle)
+  Thread buffers were grown 0 times (if all 1 threads each grew once, this figure would be 1)
+  Final type counts
+           0 : drop     
+           0 : bool8    
+           0 : int32    
+           0 : int32    
+           0 : int64    
+           0 : float32  
+           1 : float64  
+           0 : float64  
+           0 : float64  
+           1 : string   
+  =============================
+     0.012s ( 32%) Memory map 0.000GB file
+     0.009s ( 25%) sep=',' ncol=2 and header detection
+     0.009s ( 23%) Column type detection using 1052 sample rows
+     0.004s ( 12%) Allocation of 9396 rows x 2 cols (0.000GB)
+     0.003s (  9%) Reading 1 chunks of 0.158MB (9405 rows) using 1 threads
+     =    0.000s (  0%) Finding first non-embedded \n after each jump
+     +    0.001s (  2%) Parse to row-major thread buffers
+     +    0.000s (  0%) Transpose
+     +    0.003s (  7%) Waiting
+     0.000s (  0%) Rereading 0 columns due to out-of-sample type exceptions
+     0.038s        Total
+2017-10-23 12:11:18,851 1.2GB 71 INFO   : Done parsing data.
+2017-10-23 12:11:18,940 1.2GB 71 INFO   : [usage] |/parse/stats/disk_size_in_mb/0|Dataset size in MB on disk|
+2017-10-23 12:11:18,941 1.2GB 71 INFO   : [event] |Parse|Dataset size in MB on disk|NA|0|
+2017-10-23 12:11:18,943 1.2GB 71 INFO   : [usage] |/parse/stats/memory_size_in_mb/0|Dataset size in MB in memory|
+2017-10-23 12:11:18,944 1.2GB 71 INFO   : [event] |Parse|Dataset size in MB in memory|NA|0|
+2017-10-23 12:11:18,944 1.2GB 71 INFO   : [usage] |/parse/stats/num_rows/9396|Number of rows|
+2017-10-23 12:11:18,945 1.2GB 71 INFO   : [event] |Parse|Number of rows|NA|9396|
+2017-10-23 12:11:18,946 1.2GB 71 INFO   : [usage] |/parse/stats/num_cols/2|Number of cols|
+2017-10-23 12:11:18,947 1.2GB 71 INFO   : [event] |Parse|Number of cols|NA|2|
+2017-10-23 12:11:18,948 1.2GB 71 INFO   : [usage] |/parse/stats/num_int_cols/0|Number of int cols|
+2017-10-23 12:11:18,948 1.2GB 71 INFO   : [event] |Parse|Number of int cols|NA|0|
+2017-10-23 12:11:18,949 1.2GB 71 INFO   : [usage] |/parse/stats/num_str_cols/1|Number of str cols|
+2017-10-23 12:11:18,950 1.2GB 71 INFO   : [event] |Parse|Number of str cols|NA|1|
+2017-10-23 12:11:18,951 1.2GB 71 INFO   : [usage] |/parse/stats/num_real_cols/1|Number of real cols|
+2017-10-23 12:11:18,952 1.2GB 71 INFO   : [event] |Parse|Number of real cols|NA|1|
+2017-10-23 12:11:18,953 1.2GB 71 INFO   : [usage] |/parse/stats/num_bool_cols/0|Number of bool cols|
+2017-10-23 12:11:18,954 1.2GB 71 INFO   : [event] |Parse|Number of bool cols|NA|0|
+2017-10-23 12:11:18,955 1.2GB 71 INFO   : [usage] |/parse/success|Parse success|
+2017-10-23 12:11:18,956 1.2GB 71 INFO   : [event] |Parse|Parse success|NA|0|
+2017-10-23 12:11:53,706 1.1GB 71 INFO   : [usage] |/autodl/start|AutoDL start|
+2017-10-23 12:11:53,714 1.1GB 71 INFO   : [usage] |/autodl/params/classification/false|AutoDL classification parameter|
+2017-10-23 12:11:53,720 1.1GB 71 INFO   : [event] |AutoDL|AutoDL classification parameter|NA|0|
+2017-10-23 12:11:53,724 1.1GB 71 INFO   : [usage] |/autodl/params/num_dropped_cols/0|AutoDL number of dropped cols parameter|
+2017-10-23 12:11:53,728 1.1GB 71 INFO   : [event] |AutoDL|AutoDL number of dropped cols parameter|NA|0|
+2017-10-23 12:11:53,730 1.1GB 71 INFO   : [usage] |/autodl/params/disable_gpus/false|AutoDL disable GPUs parameter|
+2017-10-23 12:11:53,732 1.1GB 71 INFO   : [event] |AutoDL|AutoDL disable GPUs parameter|NA|0|
+2017-10-23 12:11:53,734 1.1GB 71 INFO   : [usage] |/autodl/params/accuracy/5|AutoDL accuracy parameter|
+2017-10-23 12:11:53,736 1.1GB 71 INFO   : [event] |AutoDL|AutoDL accuracy parameter|NA|5|
+2017-10-23 12:11:53,738 1.1GB 71 INFO   : [usage] |/autodl/params/time/5|AutoDL time parameter|
+2017-10-23 12:11:53,739 1.1GB 71 INFO   : [event] |AutoDL|AutoDL time parameter|NA|5|
+2017-10-23 12:11:53,741 1.1GB 71 INFO   : [usage] |/autodl/params/interpretability/5|AutoDL interpretability parameter|
+2017-10-23 12:11:53,741 1.1GB 71 INFO   : [event] |AutoDL|AutoDL interpretability parameter|NA|5|
+2017-10-23 12:11:53,742 1.1GB 71 INFO   : Selected Accuracy: 5 / 10
+2017-10-23 12:11:53,743 1.1GB 71 INFO   : Selected Time: 5 / 10
+2017-10-23 12:11:53,744 1.1GB 71 INFO   : Selected Interpretability: 5 / 10
+2017-10-23 12:11:53,777 1.1GB 71 INFO   : -----------------------------------------------------------------
+2017-10-23 12:11:53,777 1.1GB 71 INFO   : Checking whether we have a valid license...
+2017-10-23 12:11:53,784 1.1GB 71 WARNING: [usage] |/exception/license/notfound|License not found|
+2017-10-23 12:11:53,785 1.1GB 71 WARNING: [event] |Exception|License not found|NA|0|
+2017-10-23 12:11:56,790 1.1GB 71 ERROR  : License file does not exist (/license/license.sig)
+2017-10-23 12:11:56,792 1.1GB 71 ERROR  : Please contact sales@h2o.ai
+2017-10-23 12:11:56,794 1.1GB 71 INFO   : -----------------------------------------------------------------
+2017-10-23 12:11:56,796 1.1GB 71 ERROR  : ----------------------------------------------------------------------
+2017-10-23 12:11:56,796 1.1GB 71 ERROR  : No valid license key found
+2017-10-23 12:11:56,797 1.1GB 71 ERROR  : ----------------------------------------------------------------------
+2017-10-23 12:11:56,798 1.1GB 71 ERROR  : No valid license key found
+Traceback (most recent call last):
+  File "h2oaicore/auto_dl.py", line 254, in h2oaicore.auto_dl.do_auto_dl (h2oaicore/auto_dl.c:6759)
+  File "h2oaicore/auto_dl.py", line 42, in h2oaicore.auto_dl.check_license (h2oaicore/auto_dl.c:2556)
+Exception: No valid license key found
+2017-10-23 12:11:56,800 1.1GB 71 INFO   : Collecting system info during process shutdown
+2017-10-23 12:11:56,815 1.1GB 71 INFO   : MemTotal:        2047032 kB
+2017-10-23 12:11:56,816 1.1GB 71 INFO   : MemFree:          246776 kB
+2017-10-23 12:11:56,818 1.1GB 71 INFO   : MemAvailable:    1192476 kB
+2017-10-23 12:11:56,819 1.1GB 71 INFO   : Buffers:           73672 kB
+2017-10-23 12:11:56,820 1.1GB 71 INFO   : Cached:          1124728 kB
+2017-10-23 12:11:56,821 1.1GB 71 INFO   : SwapCached:            0 kB
+2017-10-23 12:11:56,822 1.1GB 71 INFO   : Active:           673408 kB
+2017-10-23 12:11:56,822 1.1GB 71 INFO   : Inactive:         980984 kB
+2017-10-23 12:11:56,823 1.1GB 71 INFO   : Active(anon):     507376 kB
+2017-10-23 12:11:56,824 1.1GB 71 INFO   : Inactive(anon):   117196 kB
+2017-10-23 12:11:56,825 1.1GB 71 INFO   : Active(file):     166032 kB
+2017-10-23 12:11:56,825 1.1GB 71 INFO   : Inactive(file):   863788 kB
+2017-10-23 12:11:56,826 1.1GB 71 INFO   : Unevictable:           0 kB
+2017-10-23 12:11:56,826 1.1GB 71 INFO   : Mlocked:               0 kB
+2017-10-23 12:11:56,827 1.1GB 71 INFO   : SwapTotal:       4194300 kB
+2017-10-23 12:11:56,827 1.1GB 71 INFO   : SwapFree:        4194300 kB
+2017-10-23 12:11:56,828 1.1GB 71 INFO   : Dirty:                24 kB
+2017-10-23 12:11:56,828 1.1GB 71 INFO   : Writeback:             0 kB
+2017-10-23 12:11:56,829 1.1GB 71 INFO   : AnonPages:        452044 kB
+2017-10-23 12:11:56,830 1.1GB 71 INFO   : Mapped:           128356 kB
+2017-10-23 12:11:56,830 1.1GB 71 INFO   : Shmem:            168584 kB
+2017-10-23 12:11:56,831 1.1GB 71 INFO   : Slab:             120268 kB
+2017-10-23 12:11:56,832 1.1GB 71 INFO   : SReclaimable:      94912 kB
+2017-10-23 12:11:56,833 1.1GB 71 INFO   : SUnreclaim:        25356 kB
+2017-10-23 12:11:56,834 1.1GB 71 INFO   : KernelStack:        3904 kB
+2017-10-23 12:11:56,834 1.1GB 71 INFO   : PageTables:         5700 kB
+2017-10-23 12:11:56,835 1.1GB 71 INFO   : NFS_Unstable:          0 kB
+2017-10-23 12:11:56,836 1.1GB 71 INFO   : Bounce:                0 kB
+2017-10-23 12:11:56,836 1.1GB 71 INFO   : WritebackTmp:          0 kB
+2017-10-23 12:11:56,837 1.1GB 71 INFO   : CommitLimit:     5217816 kB
+2017-10-23 12:11:56,838 1.1GB 71 INFO   : Committed_AS:    1615976 kB
+2017-10-23 12:11:56,839 1.1GB 71 INFO   : VmallocTotal:   34359738367 kB
+2017-10-23 12:11:56,839 1.1GB 71 INFO   : VmallocUsed:           0 kB
+2017-10-23 12:11:56,840 1.1GB 71 INFO   : VmallocChunk:          0 kB
+2017-10-23 12:11:56,840 1.1GB 71 INFO   : AnonHugePages:         0 kB
+2017-10-23 12:11:56,841 1.1GB 71 INFO   : ShmemHugePages:        0 kB
+2017-10-23 12:11:56,841 1.1GB 71 INFO   : ShmemPmdMapped:        0 kB
+2017-10-23 12:11:56,842 1.1GB 71 INFO   : HugePages_Total:       0
+2017-10-23 12:11:56,842 1.1GB 71 INFO   : HugePages_Free:        0
+2017-10-23 12:11:56,843 1.1GB 71 INFO   : HugePages_Rsvd:        0
+2017-10-23 12:11:56,843 1.1GB 71 INFO   : HugePages_Surp:        0
+2017-10-23 12:11:56,843 1.1GB 71 INFO   : Hugepagesize:       2048 kB
+2017-10-23 12:11:56,844 1.1GB 71 INFO   : DirectMap4k:       40960 kB
+2017-10-23 12:11:56,844 1.1GB 71 INFO   : DirectMap2M:     2056192 kB
+2017-10-23 12:11:56,845 1.1GB 71 INFO   : 
+/bin/sh: 1: nvidia-smi: not found
+2017-10-23 12:11:56,857 1.1GB 71 INFO   : Collecting logs
+2017-10-23 12:11:56,859 1.1GB 71 INFO   : Deleting temporary files
+2017-10-23 12:11:56,875 1.1GB 71 WARNING: [usage] |/exception/autodl/type/Exception|AutoDL failed|
+2017-10-23 12:11:56,876 1.1GB 71 WARNING: [usage] |/exception/autodl/message/No valid license key found|AutoDL failure message|
+2017-10-23 12:11:56,882 1.1GB 71 WARNING: [event] |Exception|AutoDL failed|NA|3|
+2017-10-23 12:19:38,333 1.2GB 1 INFO   : -----------------------------------------------------------------
+2017-10-23 12:19:38,338 1.2GB 1 INFO   : Checking whether we have a valid license...
+2017-10-23 12:19:38,341 1.2GB 1 WARNING: [usage] |/exception/license/notfound|License not found|
+2017-10-23 12:19:38,342 1.2GB 1 WARNING: [event] |Exception|License not found|NA|0|
+2017-10-23 12:19:38,351 1.2GB 1 ERROR  : License file does not exist (/license/license.sig)
+2017-10-23 12:19:38,352 1.2GB 1 ERROR  : Please contact sales@h2o.ai
+2017-10-23 12:19:38,354 1.2GB 1 INFO   : -----------------------------------------------------------------
+Traceback (most recent call last):
+  File "/usr/lib/python3.6/runpy.py", line 193, in _run_module_as_main
+    "__main__", mod_spec)
+  File "/usr/lib/python3.6/runpy.py", line 85, in _run_code
+    exec(code, run_globals)
+  File "/h2oai_env/lib/python3.6/site-packages/h2oai/__main__.py", line 26, in <module>
+    main()
+  File "/h2oai_env/lib/python3.6/site-packages/h2oai/__main__.py", line 22, in main
+    start_server(__version__, __build_info__['build'], options)
+  File "/h2oai_env/lib/python3.6/site-packages/h2oai/server.py", line 325, in start_server
+    tornado.ioloop.IOLoop.instance().start()
+  File "/h2oai_env/lib/python3.6/site-packages/tornado/ioloop.py", line 862, in start
+    event_pairs = self._impl.poll(poll_timeout)
+KeyboardInterrupt
