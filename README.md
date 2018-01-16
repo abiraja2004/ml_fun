@@ -4,6 +4,8 @@ I like to dabble with implementing interesting articles from [arXiv](https://arx
 
 ## Installation
 
+Doge memes are not funny. Cats are funny.
+
 ![Banana Cat](https://media1.giphy.com/media/yAqdjThdDEMF2/giphy.gif)
 
 ## Usage
