@@ -6,7 +6,7 @@ I like to dabble with implementing interesting articles from [arXiv](https://arx
 
 Doge memes are not funny. Cats are funny.
 
-![Banana Cat](http://i.imgur.com/Qhet8mC.gifv)
+![Banana Cat](http://i.imgur.com/Qhet8mC.gif)
 
 ## Usage
 
